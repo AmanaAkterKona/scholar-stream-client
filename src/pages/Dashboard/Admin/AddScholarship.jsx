@@ -4,6 +4,16 @@ import useAuth from '../../../hooks/useAuth';
 import useAxiosSecure from '../../../hooks/useAxiosSecute';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+// এখানে FaPlusCircle এবং FaSpinner অ্যাড করা হয়েছে
+import { 
+  FaUniversity, 
+  FaGlobeAmericas, 
+  FaGraduationCap, 
+  FaFileInvoiceDollar, 
+  FaPlusCircle, 
+  FaSpinner, 
+  FaArrowRight 
+} from 'react-icons/fa';
 
 const AddScholarship = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -14,7 +24,6 @@ const AddScholarship = () => {
 
   const onSubmit = async (data) => {
     setLoading(true);
-
     const scholarshipData = {
       scholarshipName: data.scholarshipName,
       universityName: data.universityName,
@@ -35,22 +44,20 @@ const AddScholarship = () => {
 
     try {
       const response = await axiosSecure.post('/scholarships', scholarshipData);
-      
       if (response.data.insertedId) {
         Swal.fire({
           icon: 'success',
           title: 'Success!',
           text: 'Scholarship added successfully',
-          confirmButtonColor: '#4F46E5',
+          confirmButtonColor: '#008080',
         });
         reset();
       }
     } catch (error) {
-      console.error(error);
       Swal.fire({
         icon: 'error',
         title: 'Error!',
-        text: error.response?.data?.message || 'Failed to add scholarship',
+        text: 'Failed to add scholarship',
         confirmButtonColor: '#EF4444',
       });
     } finally {
@@ -58,302 +65,137 @@ const AddScholarship = () => {
     }
   };
 
+  const inputStyle = "w-full px-4 py-3 bg-white border border-[#e2e8f0] rounded-xl text-[#1a2e35] font-semibold placeholder:text-[#94a3b8] focus:border-[#008080] focus:ring-2 focus:ring-[#008080]/10 outline-none transition-all duration-200";
+  const labelStyle = "block text-sm font-black text-[#1a2e35] mb-2 ml-1 uppercase tracking-wide";
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-6">
+    <div className="min-h-screen bg-[#f0f9ff] p-6 md:p-12 font-sans">
       <div className="max-w-5xl mx-auto">
         
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-slate-800 mb-2">Add New Scholarship</h1>
-          <p className="text-slate-600">Fill in the details to create a new scholarship opportunity</p>
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4 border-l-4 border-[#008080] pl-6">
+          <div>
+            <h1 className="text-3xl md:text-4xl font-black text-[#1a2e35] tracking-tight">
+              Add New <span className="text-[#00a3c4]">Scholarship</span>
+            </h1>
+            <p className="text-[#64748b] font-medium mt-1 italic">Publish global opportunities for the next generation.</p>
+          </div>
         </div>
 
-        {/* Form Container */}
-        <form onSubmit={handleSubmit(onSubmit)} className="bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200 p-8">
-          
-          {/* Basic Information */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold text-slate-800 mb-6 pb-2 border-b-2 border-indigo-200">
-              Basic Information
-            </h2>
+        <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-[40px] shadow-2xl shadow-cyan-900/5 p-8 md:p-12 border border-white">
+          <div className="space-y-12">
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              
-              {/* Scholarship Name */}
-              <div className="md:col-span-2">
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  Scholarship Name <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  {...register('scholarshipName', { required: 'Scholarship name is required' })}
-                  className="w-full text-blue-600 px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                  placeholder="e.g., Merit-Based Excellence Scholarship"
-                />
-                {errors.scholarshipName && (
-                  <p className="text-red-500 text-sm mt-1">{errors.scholarshipName.message}</p>
-                )}
+            {/* Institution Section */}
+            <section>
+              <div className="flex items-center gap-3 mb-8 border-b border-slate-100 pb-4">
+                <FaUniversity className="text-[#008080] text-xl" />
+                <h2 className="text-xl font-black text-[#1a2e35]">University Profile</h2>
               </div>
-
-              {/* University Name */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  University Name <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  {...register('universityName', { required: 'University name is required' })}
-                  className="w-full text-blue-600 px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                  placeholder="e.g., Harvard University"
-                />
-                {errors.universityName && (
-                  <p className="text-red-500 text-sm mt-1">{errors.universityName.message}</p>
-                )}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="md:col-span-2">
+                  <label className={labelStyle}>Scholarship Name *</label>
+                  <input type="text" {...register('scholarshipName', { required: true })} className={inputStyle} placeholder="e.g. Merit-Based Excellence Scholarship" />
+                </div>
+                <div>
+                  <label className={labelStyle}>University Name *</label>
+                  <input type="text" {...register('universityName', { required: true })} className={inputStyle} placeholder="University Full Name" />
+                </div>
+                <div>
+                  <label className={labelStyle}>University Image URL *</label>
+                  <input type="url" {...register('universityImage', { required: true })} className={inputStyle} placeholder="https://example.com/image.jpg" />
+                </div>
               </div>
+            </section>
 
-              {/* University Image URL */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  University Image URL <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="url"
-                  {...register('universityImage', { required: 'Image URL is required' })}
-                  className="w-full text-blue-600 px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                  placeholder="https://example.com/image.jpg"
-                />
-                {errors.universityImage && (
-                  <p className="text-red-500 text-sm mt-1">{errors.universityImage.message}</p>
-                )}
+            {/* Global Standings Section */}
+            <section className="bg-[#f0f9ff]/40 p-6 md:p-8 rounded-[30px] border border-[#e0f2fe]">
+              <div className="flex items-center gap-3 mb-8">
+                <FaGlobeAmericas className="text-[#008080] text-xl" />
+                <h2 className="text-xl font-black text-[#1a2e35]">Global Standings</h2>
               </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                  <label className={labelStyle}>Country</label>
+                  <input type="text" {...register('universityCountry', { required: true })} className={inputStyle} placeholder="e.g. USA" />
+                </div>
+                <div>
+                  <label className={labelStyle}>City</label>
+                  <input type="text" {...register('universityCity', { required: true })} className={inputStyle} placeholder="City Name" />
+                </div>
+                <div>
+                  <label className={labelStyle}>World Rank</label>
+                  <input type="number" {...register('universityWorldRank', { required: true })} className={inputStyle} placeholder="e.g. 1" />
+                </div>
+              </div>
+            </section>
 
-            </div>
+            {/* Academic & Finance Section */}
+            <section>
+              <div className="flex items-center gap-3 mb-8 border-b border-slate-100 pb-4">
+                <FaGraduationCap className="text-[#008080] text-2xl" />
+                <h2 className="text-xl font-black text-[#1a2e35]">Academic & Financials</h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div>
+                  <label className={labelStyle}>Subject Category</label>
+                  <select {...register('subjectCategory', { required: true })} className={inputStyle}>
+                    <option value="">Select Category</option>
+                    <option value="Engineering">Engineering</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Business">Business</option>
+                  </select>
+                </div>
+                <div>
+                  <label className={labelStyle}>Scholarship Type</label>
+                  <select {...register('scholarshipCategory', { required: true })} className={inputStyle}>
+                    <option value="">Select Type</option>
+                    <option value="Full fund">Full fund</option>
+                    <option value="Partial">Partial</option>
+                  </select>
+                </div>
+                <div>
+                  <label className={labelStyle}>Degree</label>
+                  <select {...register('degree', { required: true })} className={inputStyle}>
+                    <option value="">Select Degree</option>
+                    <option value="Bachelor">Bachelor</option>
+                    <option value="Masters">Masters</option>
+                  </select>
+                </div>
+                <div>
+                  <label className={labelStyle}>Tuition Fee ($)</label>
+                  <input type="number" step="0.01" {...register('tuitionFees')} className={inputStyle} placeholder="0.00" />
+                </div>
+                <div>
+                  <label className={labelStyle}>Application Fee ($)</label>
+                  <input type="number" step="0.01" {...register('applicationFees', { required: true })} className={inputStyle} placeholder="0.00" />
+                </div>
+                <div>
+                  <label className={labelStyle}>Service Charge ($)</label>
+                  <input type="number" step="0.01" {...register('serviceCharge', { required: true })} className={inputStyle} placeholder="0.00" />
+                </div>
+                <div className="lg:col-span-3">
+                   <label className={labelStyle}>Application Deadline</label>
+                   <input type="date" {...register('applicationDeadline', { required: true })} className={inputStyle} />
+                </div>
+              </div>
+            </section>
           </div>
 
-          {/* Location & Ranking */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold text-slate-800 mb-6 pb-2 border-b-2 border-indigo-200">
-              Location & Ranking
-            </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              
-              {/* Country */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  Country <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  {...register('universityCountry', { required: 'Country is required' })}
-                  className="w-full text-blue-600 px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                  placeholder="e.g., United States"
-                />
-                {errors.universityCountry && (
-                  <p className="text-red-500 text-sm mt-1">{errors.universityCountry.message}</p>
-                )}
-              </div>
-
-              {/* City */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  City <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  {...register('universityCity', { required: 'City is required' })}
-                  className="w-full text-blue-600 px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                  placeholder="e.g., Cambridge"
-                />
-                {errors.universityCity && (
-                  <p className="text-red-500 text-sm mt-1">{errors.universityCity.message}</p>
-                )}
-              </div>
-
-              {/* World Rank */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  World Rank <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="number"
-                  {...register('universityWorldRank', { required: 'World rank is required', min: 1 })}
-                  className="w-full text-blue-600 px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                  placeholder="e.g., 1"
-                />
-                {errors.universityWorldRank && (
-                  <p className="text-red-500 text-sm mt-1">{errors.universityWorldRank.message}</p>
-                )}
-              </div>
-
-            </div>
-          </div>
-
-          {/* Academic Details */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold text-slate-800 mb-6 pb-2 border-b-2 border-indigo-200">
-              Academic Details
-            </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              
-              {/* Subject Category */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  Subject Category <span className="text-red-500">*</span>
-                </label>
-                <select
-                  {...register('subjectCategory', { required: 'Subject category is required' })}
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                >
-                  <option value="">Select Subject</option>
-                  <option value="Engineering">Engineering</option>
-                  <option value="Computer Science">Computer Science</option>
-                  <option value="Business">Business</option>
-                  <option value="Medicine">Medicine</option>
-                  <option value="Law">Law</option>
-                  <option value="Arts">Arts</option>
-                  <option value="Science">Science</option>
-                  <option value="Social Sciences">Social Sciences</option>
-                </select>
-                {errors.subjectCategory && (
-                  <p className="text-red-500 text-sm mt-1">{errors.subjectCategory.message}</p>
-                )}
-              </div>
-
-              {/* Scholarship Category */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  Scholarship Category <span className="text-red-500">*</span>
-                </label>
-                <select
-                  {...register('scholarshipCategory', { required: 'Scholarship category is required' })}
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                >
-                  <option value="">Select Category</option>
-                  <option value="Full fund">Full fund</option>
-                  <option value="Partial">Partial</option>
-                  <option value="Self-fund">Self-fund</option>
-                </select>
-                {errors.scholarshipCategory && (
-                  <p className="text-red-500 text-sm mt-1">{errors.scholarshipCategory.message}</p>
-                )}
-              </div>
-
-              {/* Degree */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  Degree <span className="text-red-500">*</span>
-                </label>
-                <select
-                  {...register('degree', { required: 'Degree is required' })}
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                >
-                  <option value="">Select Degree</option>
-                  <option value="Diploma">Diploma</option>
-                  <option value="Bachelor">Bachelor</option>
-                  <option value="Masters">Masters</option>
-                </select>
-                {errors.degree && (
-                  <p className="text-red-500 text-sm mt-1">{errors.degree.message}</p>
-                )}
-              </div>
-
-              {/* Application Deadline */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  Application Deadline <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="date"
-                  {...register('applicationDeadline', { required: 'Deadline is required' })}
-                  className="w-full text-blue-600 px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                />
-                {errors.applicationDeadline && (
-                  <p className="text-red-500 text-sm mt-1">{errors.applicationDeadline.message}</p>
-                )}
-              </div>
-
-            </div>
-          </div>
-
-          {/* Financial Details */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold text-slate-800 mb-6 pb-2 border-b-2 border-indigo-200">
-              Financial Details
-            </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              
-              {/* Tuition Fees */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  Tuition Fees (Optional)
-                </label>
-                <input
-                  type="number"
-                  step="0.01"
-                  {...register('tuitionFees')}
-                  className="w-full text-blue-600 px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                  placeholder="e.g., 50000"
-                />
-              </div>
-
-              {/* Application Fees */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  Application Fees <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="number"
-                  step="0.01"
-                  {...register('applicationFees', { required: 'Application fees is required', min: 0 })}
-                  className="w-full text-blue-600 px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                  placeholder="e.g., 100"
-                />
-                {errors.applicationFees && (
-                  <p className="text-red-500 text-sm mt-1">{errors.applicationFees.message}</p>
-                )}
-              </div>
-
-              {/* Service Charge */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  Service Charge <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="number"
-                  step="0.01"
-                  {...register('serviceCharge', { required: 'Service charge is required', min: 0 })}
-                  className="w-full text-blue-600 px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                  placeholder="e.g., 50"
-                />
-                {errors.serviceCharge && (
-                  <p className="text-red-500 text-sm mt-1">{errors.serviceCharge.message}</p>
-                )}
-              </div>
-
-            </div>
-          </div>
-
-          {/* Submit Button */}
-          <div className="flex justify-end gap-4">
+          <div className="mt-12 flex flex-col md:flex-row justify-end items-center gap-6 pt-10 border-t border-slate-100">
             <button
               type="button"
               onClick={() => reset()}
-              className="px-8 py-3 border-2 border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-100 transition-all"
+              className="text-[#64748b] font-bold uppercase tracking-widest text-xs hover:text-[#1a2e35] transition-colors"
             >
-              Reset
+              Reset Form
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full md:w-auto px-12 py-4 bg-[#008080] hover:bg-[#006666] text-white font-black rounded-2xl shadow-lg flex items-center justify-center gap-3 transition-all active:scale-95 disabled:opacity-50"
             >
-              {loading ? 'Adding...' : 'Add Scholarship'}
+              {loading ? <FaSpinner className="animate-spin text-xl" /> : <><FaPlusCircle /> Publish Scholarship <FaArrowRight className="text-sm" /></>}
             </button>
           </div>
-
         </form>
       </div>
     </div>
