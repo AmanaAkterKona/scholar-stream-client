@@ -1,0 +1,18 @@
+.premium-spinner {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 6px solid transparent;
+  border-top: 6px solid #37c4ef;       /* Light blue top */
+  border-right: 6px solid #0b3c49;     /* Darker blue right */
+  border-bottom: 6px solid #37c4ef;    /* Light blue bottom */
+  border-left: 6px solid #0b3c49;      /* Darker blue left */
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 15px rgba(55,196,239,0.6),
+              0 0 25px rgba(11,60,73,0.4);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
