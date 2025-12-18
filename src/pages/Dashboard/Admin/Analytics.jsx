@@ -225,7 +225,7 @@ const Analytics = () => {
                 <YAxis tick={{ fill: '#64748B' }} />
                 <Tooltip 
                   contentStyle={{ 
-                    backgroundColor: 'white', 
+                    backgroundColor: 'gray', 
                     border: '2px solid #E2E8F0',
                     borderRadius: '12px',
                     boxShadow: '0 10px 25px rgba(0,0,0,0.1)'
@@ -276,7 +276,7 @@ const Analytics = () => {
                 </Pie>
                 <Tooltip 
                   contentStyle={{ 
-                    backgroundColor: 'white', 
+                    backgroundColor: 'pink', 
                     border: '2px solid #E2E8F0',
                     borderRadius: '12px',
                     boxShadow: '0 10px 25px rgba(0,0,0,0.1)'

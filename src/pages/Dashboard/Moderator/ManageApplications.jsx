@@ -275,7 +275,7 @@ const ManageApplications = () => {
                 placeholder="Search by name, email, or university..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                className="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-gray-600"
               />
             </div>
 
@@ -284,7 +284,7 @@ const ManageApplications = () => {
               <select
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
-                className="px-5 py-4 border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 font-medium cursor-pointer"
+                className="px-5 py-4 border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 font-medium cursor-pointer text-gray-600"
               >
                 <option value="all">All Status</option>
                 <option value="pending">⏳ Pending</option>
@@ -382,7 +382,7 @@ const ManageApplications = () => {
                           <select
                             value={app.applicationStatus || 'pending'}
                             onChange={(e) => handleStatusUpdate(app._id, e.target.value)}
-                            className="px-3 py-2 text-xs font-semibold border-2 border-slate-200 rounded-lg cursor-pointer hover:border-indigo-400 transition-all"
+                            className="px-3 py-2 text-xs font-semibold border-2 border-slate-200 rounded-lg cursor-pointer hover:border-indigo-400 transition-all text-gray-600"
                           >
                             <option value="pending">Pending</option>
                             <option value="processing">Processing</option>
@@ -489,12 +489,12 @@ const ManageApplications = () => {
               <p className="text-white/80 text-sm mt-1">For {selectedApp.userName}</p>
             </div>
             
-            <form onSubmit={handleSubmitFeedback} className="p-6">
+            <form onSubmit={handleSubmitFeedback} className="p-6 text-gray-600">
               <textarea
                 name="feedback"
                 defaultValue={selectedApp.feedback}
                 placeholder="Write your feedback here..."
-                className="w-full px-4 py-3 border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 min-h-[150px]"
+                className="w-full placeholder:text-pink-600 px-4 py-3 border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 min-h-[150px]"
                 required
               />
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Swal from 'sweetalert2';
-import { Star, Trash2, Search, MessageSquare, User, Calendar } from 'lucide-react';
+import { Star, Trash2, Search, MessageSquare, User, Calendar, Mail, GraduationCap } from 'lucide-react';
 import useAxiosSecure from '../../../hooks/useAxiosSecute';
 
 const AllReviews = () => {
@@ -114,7 +114,7 @@ const AllReviews = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50 to-purple-50 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-purple-50 p-6">
       <div className="max-w-7xl mx-auto">
         
         {/* Header */}
@@ -183,13 +183,13 @@ const AllReviews = () => {
         <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 p-6 mb-8">
           <div className="flex items-center gap-4">
             <div className="flex-1 relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
+              <Search className="absolute  left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
               <input
                 type="text"
                 placeholder="Search reviews by name, university, or comment..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                className="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-gray-700"
               />
             </div>
 
@@ -199,75 +199,91 @@ const AllReviews = () => {
             </div>
           </div>
         </div>
+{/* Reviews Grid */}
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {filteredReviews.length === 0 ? (
+    <div className="col-span-full flex flex-col items-center justify-center py-20 bg-white rounded-[32px] border-2 border-dashed border-slate-200">
+      <MessageSquare className="w-20 h-20 text-slate-200 mb-4" />
+      <p className="text-2xl font-black text-slate-800 mb-2">No Reviews Found</p>
+      <p className="text-slate-500 font-bold">Try adjusting your search criteria</p>
+    </div>
+  ) : (
+    filteredReviews.map((review) => (
+      <div
+        key={review._id}
+        className="group bg-white rounded-[32px] p-8 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.08)] border border-slate-100 hover:border-indigo-500 hover:shadow-indigo-500/10 transition-all duration-300 relative overflow-hidden"
+      >
+        {/* Floating Accent Background */}
+        <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-50/50 rounded-bl-full -mr-10 -mt-10 group-hover:bg-indigo-100 transition-colors"></div>
 
-        {/* Reviews Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredReviews.length === 0 ? (
-            <div className="col-span-full flex flex-col items-center justify-center py-16">
-              <MessageSquare className="w-20 h-20 text-slate-300 mb-4" />
-              <p className="text-xl font-bold text-slate-700 mb-2">No Reviews Found</p>
-              <p className="text-slate-500">Try adjusting your search</p>
+        {/* User Info Section */}
+        <div className="flex items-center gap-4 mb-6 relative z-10">
+          <div className="relative">
+            <img
+              src={review.userImage || 'https://i.ibb.co/5GzXkwq/user.png'}
+              alt={review.userName}
+              className="w-14 h-14 rounded-2xl object-cover ring-4 ring-slate-50 shadow-md group-hover:scale-110 transition-transform duration-300"
+            />
+            <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-500 border-2 border-white rounded-full"></div>
+          </div>
+          <div className="flex-1 overflow-hidden">
+            <div className="font-black text-slate-900 text-lg leading-tight truncate">
+              {review.userName}
             </div>
-          ) : (
-            filteredReviews.map((review) => (
-              <div
-                key={review._id}
-                className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 p-6 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
-              >
-                {/* User Info */}
-                <div className="flex items-center gap-3 mb-4">
-                  <img
-                    src={review.userImage || 'https://via.placeholder.com/100'}
-                    alt={review.userName}
-                    className="w-12 h-12 rounded-full object-cover border-2 border-indigo-200"
-                  />
-                  <div className="flex-1">
-                    <div className="font-bold text-slate-800">{review.userName}</div>
-                    <div className="text-xs text-slate-500">{review.userEmail}</div>
-                  </div>
-                </div>
-
-                {/* University */}
-                <div className="mb-3">
-                  <div className="text-sm font-semibold text-indigo-600 mb-1">
-                    {review.universityName}
-                  </div>
-                </div>
-
-                {/* Rating */}
-                <div className="flex items-center gap-1 mb-3">
-                  {renderStars(review.ratingPoint || 0)}
-                  <span className="ml-2 text-sm font-semibold text-slate-700">
-                    {review.ratingPoint}/5
-                  </span>
-                </div>
-
-                {/* Comment */}
-                <div className="mb-4">
-                  <p className="text-slate-700 text-sm leading-relaxed line-clamp-3">
-                    {review.reviewComment}
-                  </p>
-                </div>
-
-                {/* Date & Actions */}
-                <div className="flex items-center justify-between pt-4 border-t border-slate-200">
-                  <div className="flex items-center gap-1 text-xs text-slate-500">
-                    <Calendar className="w-3 h-3" />
-                    <span>{new Date(review.reviewDate).toLocaleDateString()}</span>
-                  </div>
-                  
-                  <button
-                    onClick={() => handleDelete(review._id, review.userName)}
-                    className="p-2 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg transition-all"
-                    title="Delete Review"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            ))
-          )}
+            <div className="flex items-center gap-1 text-indigo-600/70 font-bold text-xs mt-1">
+              <Mail size={12} />
+              <span className="truncate">{review.userEmail}</span>
+            </div>
+          </div>
         </div>
+
+        {/* University Highlight */}
+        <div className="flex items-center gap-2 mb-4">
+          <div className="p-1.5 bg-indigo-600 rounded-lg shadow-lg shadow-indigo-100">
+            <GraduationCap size={16} className="text-white" />
+          </div>
+          <span className="text-[11px] font-black text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
+            {review.universityName}
+          </span>
+        </div>
+
+        {/* Rating Star Section */}
+        <div className="flex items-center gap-3 mb-5 bg-slate-50 w-fit px-4 py-2 rounded-2xl border border-slate-100">
+          <div className="flex gap-0.5">
+            {renderStars(review.ratingPoint || 0)}
+          </div>
+          <span className="text-sm font-black text-slate-900 border-l border-slate-200 pl-3">
+            {review.ratingPoint}.0
+          </span>
+        </div>
+
+        {/* Comment - Highly Highlighted */}
+        <div className="mb-8 min-h-[80px]">
+          <p className="text-slate-700 text-[15px] font-bold leading-relaxed italic relative">
+             <span className="text-4xl text-indigo-100 absolute -top-4 -left-2 font-serif">“</span>
+             {review.reviewComment}
+          </p>
+        </div>
+
+        {/* Bottom Bar: Date & Actions */}
+        <div className="flex items-center justify-between pt-6 border-t border-slate-100 relative z-10">
+          <div className="flex items-center gap-2 text-slate-400 font-black text-[10px] uppercase tracking-tighter">
+            <Calendar className="w-3.5 h-3.5" />
+            <span>{new Date(review.reviewDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+          </div>
+          
+          <button
+            onClick={() => handleDelete(review._id, review.userName)}
+            className="p-3 bg-rose-50 hover:bg-rose-600 text-rose-600 hover:text-white rounded-2xl transition-all duration-300 transform group-hover:rotate-6 shadow-sm hover:shadow-rose-200"
+            title="Remove Review"
+          >
+            <Trash2 className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+    ))
+  )}
+</div>
 
       </div>
     </div>
