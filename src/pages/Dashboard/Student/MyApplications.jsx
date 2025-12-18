@@ -229,7 +229,7 @@ const MyApplications = () => {
       {/* Edit Modal (Connected) */}
       {showEditModal && selectedApp && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl p-8 max-w-lg w-full">
+          <div className="bg-white rounded-xl p-8 max-w-lg w-full text-gray-700">
             <h2 className="text-3xl font-bold text-slate-800 mb-6">Edit Application</h2>
             <form onSubmit={handleEditSubmit}>
               <div className="space-y-4">
