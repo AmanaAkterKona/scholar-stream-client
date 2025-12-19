@@ -52,19 +52,22 @@ const AuthProvider = ({ children }) => {
         try {
           // ✅ Check role from backend
           const res = await axios.get(
-            `http://localhost:3000/users/role?email=${currentUser.email}`
+            `https://scholar-stream-server-alpha.vercel.app/users/role?email=${currentUser.email}`
           );
 
           let role = "student"; // default role
 
           // ✅ যদি user MongoDB তে না থাকে, তাহলে save করো
           if (!res.data || !res.data.role) {
-            await axios.post("http://localhost:3000/users", {
-              name: currentUser.displayName || "No Name",
-              email: currentUser.email,
-              photoURL: currentUser.photoURL || "",
-              role: "student",
-            });
+            await axios.post(
+              "https://scholar-stream-server-alpha.vercel.app/users",
+              {
+                name: currentUser.displayName || "No Name",
+                email: currentUser.email,
+                photoURL: currentUser.photoURL || "",
+                role: "student",
+              }
+            );
           } else {
             role = (res.data.role || "student").toLowerCase();
           }
@@ -80,12 +83,15 @@ const AuthProvider = ({ children }) => {
 
           // ✅ Fallback: MongoDB তে user save করার চেষ্টা করো
           try {
-            await axios.post("http://localhost:3000/users", {
-              name: currentUser.displayName || "No Name",
-              email: currentUser.email,
-              photoURL: currentUser.photoURL || "",
-              role: "student",
-            });
+            await axios.post(
+              "https://scholar-stream-server-alpha.vercel.app/users",
+              {
+                name: currentUser.displayName || "No Name",
+                email: currentUser.email,
+                photoURL: currentUser.photoURL || "",
+                role: "student",
+              }
+            );
 
             setUser({
               ...currentUser,
@@ -122,7 +128,9 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
   };
 
-  return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;

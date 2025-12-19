@@ -1,13 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import { 
-  BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, 
-  Tooltip, Legend, ResponsiveContainer 
-} from 'recharts';
-import { 
-  Users, DollarSign, GraduationCap, TrendingUp, 
-  Award, Globe, Building2, Calendar 
-} from 'lucide-react';
-import useAxiosSecure from '../../../hooks/useAxiosSecute';
+import React, { useEffect, useState } from "react";
+import {
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+import {
+  Users,
+  DollarSign,
+  GraduationCap,
+  TrendingUp,
+  Award,
+  Globe,
+  Building2,
+  Calendar,
+} from "lucide-react";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const Analytics = () => {
   const axiosSecure = useAxiosSecure();
@@ -30,9 +45,9 @@ const Analytics = () => {
     try {
       // Fetch all required data
       const [usersRes, scholarshipsRes, applicationsRes] = await Promise.all([
-        axiosSecure.get('/users'),
-        axiosSecure.get('/scholarships'),
-        axiosSecure.get('/applications'),
+        axiosSecure.get("/users"),
+        axiosSecure.get("/scholarships"),
+        axiosSecure.get("/applications"),
       ]);
 
       const users = usersRes.data;
@@ -48,8 +63,8 @@ const Analytics = () => {
 
       // Group applications by university
       const universityMap = {};
-      applications.forEach(app => {
-        const uni = app.universityName || 'Unknown';
+      applications.forEach((app) => {
+        const uni = app.universityName || "Unknown";
         universityMap[uni] = (universityMap[uni] || 0) + 1;
       });
 
@@ -60,13 +75,14 @@ const Analytics = () => {
 
       // Group applications by scholarship category
       const categoryMap = {};
-      applications.forEach(app => {
-        const cat = app.scholarshipCategory || 'Unknown';
+      applications.forEach((app) => {
+        const cat = app.scholarshipCategory || "Unknown";
         categoryMap[cat] = (categoryMap[cat] || 0) + 1;
       });
 
-      const applicationsByCategory = Object.entries(categoryMap)
-        .map(([name, value]) => ({ name, value }));
+      const applicationsByCategory = Object.entries(categoryMap).map(
+        ([name, value]) => ({ name, value })
+      );
 
       setStats({
         totalUsers: users.length,
@@ -79,13 +95,20 @@ const Analytics = () => {
 
       setLoading(false);
     } catch (error) {
-      console.error('Error fetching analytics:', error);
+      console.error("Error fetching analytics:", error);
       setLoading(false);
     }
   };
 
   // Colors for charts
-  const COLORS = ['#6366F1', '#8B5CF6', '#EC4899', '#F59E0B', '#10B981', '#3B82F6'];
+  const COLORS = [
+    "#6366F1",
+    "#8B5CF6",
+    "#EC4899",
+    "#F59E0B",
+    "#10B981",
+    "#3B82F6",
+  ];
 
   if (loading) {
     return (
@@ -96,7 +119,9 @@ const Analytics = () => {
             <BarChart className="w-8 h-8 text-indigo-600" />
           </div>
         </div>
-        <p className="mt-4 text-slate-600 font-medium animate-pulse">Loading analytics...</p>
+        <p className="mt-4 text-slate-600 font-medium animate-pulse">
+          Loading analytics...
+        </p>
       </div>
     );
   }
@@ -104,7 +129,6 @@ const Analytics = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50 to-purple-50 p-6">
       <div className="max-w-7xl mx-auto">
-        
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-3">
@@ -115,14 +139,15 @@ const Analytics = () => {
               <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
                 Platform Analytics
               </h1>
-              <p className="text-slate-600 mt-1">Comprehensive insights and performance metrics</p>
+              <p className="text-slate-600 mt-1">
+                Comprehensive insights and performance metrics
+              </p>
             </div>
           </div>
         </div>
 
         {/* Main Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          
           {/* Total Users */}
           <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 p-6 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
             <div className="flex items-center justify-between mb-4">
@@ -134,11 +159,15 @@ const Analytics = () => {
                 <span>Active</span>
               </div>
             </div>
-            <h3 className="text-slate-600 text-sm font-semibold mb-2">Total Users</h3>
+            <h3 className="text-slate-600 text-sm font-semibold mb-2">
+              Total Users
+            </h3>
             <p className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
               {stats.totalUsers.toLocaleString()}
             </p>
-            <p className="text-slate-500 text-xs mt-2">Registered members on platform</p>
+            <p className="text-slate-500 text-xs mt-2">
+              Registered members on platform
+            </p>
           </div>
 
           {/* Total Scholarships */}
@@ -152,11 +181,15 @@ const Analytics = () => {
                 <span>Live</span>
               </div>
             </div>
-            <h3 className="text-slate-600 text-sm font-semibold mb-2">Total Scholarships</h3>
+            <h3 className="text-slate-600 text-sm font-semibold mb-2">
+              Total Scholarships
+            </h3>
             <p className="text-4xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
               {stats.totalScholarships.toLocaleString()}
             </p>
-            <p className="text-slate-500 text-xs mt-2">Available opportunities</p>
+            <p className="text-slate-500 text-xs mt-2">
+              Available opportunities
+            </p>
           </div>
 
           {/* Total Applications */}
@@ -170,11 +203,15 @@ const Analytics = () => {
                 <span>Growing</span>
               </div>
             </div>
-            <h3 className="text-slate-600 text-sm font-semibold mb-2">Total Applications</h3>
+            <h3 className="text-slate-600 text-sm font-semibold mb-2">
+              Total Applications
+            </h3>
             <p className="text-4xl font-bold bg-gradient-to-r from-rose-600 to-pink-600 bg-clip-text text-transparent">
               {stats.totalApplications.toLocaleString()}
             </p>
-            <p className="text-slate-500 text-xs mt-2">Submitted applications</p>
+            <p className="text-slate-500 text-xs mt-2">
+              Submitted applications
+            </p>
           </div>
 
           {/* Total Fees Collected */}
@@ -188,18 +225,24 @@ const Analytics = () => {
                 <span>Revenue</span>
               </div>
             </div>
-            <h3 className="text-slate-600 text-sm font-semibold mb-2">Total Fees Collected</h3>
+            <h3 className="text-slate-600 text-sm font-semibold mb-2">
+              Total Fees Collected
+            </h3>
             <p className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-              ${stats.totalFeesCollected.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              $
+              {stats.totalFeesCollected.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
             </p>
-            <p className="text-slate-500 text-xs mt-2">Application & service fees</p>
+            <p className="text-slate-500 text-xs mt-2">
+              Application & service fees
+            </p>
           </div>
-
         </div>
 
         {/* Charts Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          
           {/* Bar Chart - Applications by University */}
           <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 p-8">
             <div className="flex items-center gap-3 mb-6">
@@ -207,39 +250,49 @@ const Analytics = () => {
                 <Building2 className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-slate-800">Applications by University</h2>
-                <p className="text-slate-600 text-sm">Top 10 most popular universities</p>
+                <h2 className="text-2xl font-bold text-slate-800">
+                  Applications by University
+                </h2>
+                <p className="text-slate-600 text-sm">
+                  Top 10 most popular universities
+                </p>
               </div>
             </div>
-            
+
             <ResponsiveContainer width="100%" height={350}>
               <BarChart data={stats.applicationsByUniversity}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
-                <XAxis 
-                  dataKey="name" 
-                  angle={-45} 
-                  textAnchor="end" 
+                <XAxis
+                  dataKey="name"
+                  angle={-45}
+                  textAnchor="end"
                   height={120}
-                  tick={{ fill: '#64748B', fontSize: 12 }}
+                  tick={{ fill: "#64748B", fontSize: 12 }}
                 />
-                <YAxis tick={{ fill: '#64748B' }} />
-                <Tooltip 
-                  contentStyle={{ 
-                    backgroundColor: 'gray', 
-                    border: '2px solid #E2E8F0',
-                    borderRadius: '12px',
-                    boxShadow: '0 10px 25px rgba(0,0,0,0.1)'
+                <YAxis tick={{ fill: "#64748B" }} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "gray",
+                    border: "2px solid #E2E8F0",
+                    borderRadius: "12px",
+                    boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
                   }}
                 />
-                <Bar 
-                  dataKey="applications" 
+                <Bar
+                  dataKey="applications"
                   fill="url(#colorGradient)"
                   radius={[8, 8, 0, 0]}
                 />
                 <defs>
-                  <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#6366F1" stopOpacity={1}/>
-                    <stop offset="100%" stopColor="#8B5CF6" stopOpacity={0.8}/>
+                  <linearGradient
+                    id="colorGradient"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="1"
+                  >
+                    <stop offset="0%" stopColor="#6366F1" stopOpacity={1} />
+                    <stop offset="100%" stopColor="#8B5CF6" stopOpacity={0.8} />
                   </linearGradient>
                 </defs>
               </BarChart>
@@ -253,11 +306,15 @@ const Analytics = () => {
                 <Globe className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-slate-800">Applications by Category</h2>
-                <p className="text-slate-600 text-sm">Distribution of scholarship types</p>
+                <h2 className="text-2xl font-bold text-slate-800">
+                  Applications by Category
+                </h2>
+                <p className="text-slate-600 text-sm">
+                  Distribution of scholarship types
+                </p>
               </div>
             </div>
-            
+
             <ResponsiveContainer width="100%" height={350}>
               <PieChart>
                 <Pie
@@ -265,37 +322,36 @@ const Analytics = () => {
                   cx="50%"
                   cy="50%"
                   labelLine={false}
-                  label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                  label={({ name, percent }) =>
+                    `${name}: ${(percent * 100).toFixed(0)}%`
+                  }
                   outerRadius={120}
                   fill="#8884d8"
                   dataKey="value"
                 >
                   {stats.applicationsByCategory.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
                   ))}
                 </Pie>
-                <Tooltip 
-                  contentStyle={{ 
-                    backgroundColor: 'pink', 
-                    border: '2px solid #E2E8F0',
-                    borderRadius: '12px',
-                    boxShadow: '0 10px 25px rgba(0,0,0,0.1)'
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "pink",
+                    border: "2px solid #E2E8F0",
+                    borderRadius: "12px",
+                    boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
                   }}
                 />
-                <Legend 
-                  verticalAlign="bottom" 
-                  height={36}
-                  iconType="circle"
-                />
+                <Legend verticalAlign="bottom" height={36} iconType="circle" />
               </PieChart>
             </ResponsiveContainer>
           </div>
-
         </div>
 
         {/* Additional Insights */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
           {/* Average Application Fee */}
           <div className="bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl shadow-xl p-6 text-white">
             <div className="flex items-center gap-3 mb-3">
@@ -305,9 +361,12 @@ const Analytics = () => {
               <h3 className="font-semibold text-white/90">Average Fee</h3>
             </div>
             <p className="text-3xl font-bold">
-              ${stats.totalApplications > 0 
-                ? (stats.totalFeesCollected / stats.totalApplications).toFixed(2) 
-                : '0.00'}
+              $
+              {stats.totalApplications > 0
+                ? (stats.totalFeesCollected / stats.totalApplications).toFixed(
+                    2
+                  )
+                : "0.00"}
             </p>
             <p className="text-white/70 text-sm mt-2">Per application</p>
           </div>
@@ -321,11 +380,13 @@ const Analytics = () => {
               <h3 className="font-semibold text-white/90">Application Rate</h3>
             </div>
             <p className="text-3xl font-bold">
-              {stats.totalScholarships > 0 
-                ? (stats.totalApplications / stats.totalScholarships).toFixed(1) 
-                : '0.0'}
+              {stats.totalScholarships > 0
+                ? (stats.totalApplications / stats.totalScholarships).toFixed(1)
+                : "0.0"}
             </p>
-            <p className="text-white/70 text-sm mt-2">Applications per scholarship</p>
+            <p className="text-white/70 text-sm mt-2">
+              Applications per scholarship
+            </p>
           </div>
 
           {/* Platform Growth */}
@@ -337,15 +398,18 @@ const Analytics = () => {
               <h3 className="font-semibold text-white/90">Engagement Score</h3>
             </div>
             <p className="text-3xl font-bold">
-              {stats.totalUsers > 0 
-                ? ((stats.totalApplications / stats.totalUsers) * 100).toFixed(0) 
-                : '0'}%
+              {stats.totalUsers > 0
+                ? ((stats.totalApplications / stats.totalUsers) * 100).toFixed(
+                    0
+                  )
+                : "0"}
+              %
             </p>
-            <p className="text-white/70 text-sm mt-2">User participation rate</p>
+            <p className="text-white/70 text-sm mt-2">
+              User participation rate
+            </p>
           </div>
-
         </div>
-
       </div>
     </div>
   );

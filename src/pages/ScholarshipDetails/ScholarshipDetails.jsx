@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import useAxiosSecure from "../../hooks/useAxiosSecute";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import {
   FaGraduationCap,
@@ -68,7 +68,10 @@ const ScholarshipDetails = () => {
     // ✅ ২. সাবমিট করার সময় ইমেজ ও নাম নিশ্চিত করা
     const newReview = {
       scholarshipId: id,
-      reviewerName: user?.displayName || user?.email?.split('@')[0] || "Scholarship Student",
+      reviewerName:
+        user?.displayName ||
+        user?.email?.split("@")[0] ||
+        "Scholarship Student",
       reviewerImage: user?.photoURL || defaultImg, // যদি প্রোফাইলে ছবি না থাকে তবে ডিফল্ট যাবে
       ratingPoint: parseInt(reviewInput.ratingPoint),
       reviewComment: reviewInput.reviewComment,
@@ -144,7 +147,11 @@ const ScholarshipDetails = () => {
                     Deadline
                   </p>
                   <p className="text-xl font-bold text-slate-800">
-                    {scholarship?.applicationDeadline ? new Date(scholarship.applicationDeadline).toLocaleDateString() : 'N/A'}
+                    {scholarship?.applicationDeadline
+                      ? new Date(
+                          scholarship.applicationDeadline
+                        ).toLocaleDateString()
+                      : "N/A"}
                   </p>
                 </div>
               </div>
@@ -232,12 +239,14 @@ const ScholarshipDetails = () => {
                     <div className="flex flex-col sm:flex-row gap-6">
                       {/* ✅ ৩. ইমেজ ডিসপ্লে লজিক উইথ এরর হ্যান্ডলিং */}
                       <img
-                        src={review.reviewerImage || review.userImage || defaultImg}
+                        src={
+                          review.reviewerImage || review.userImage || defaultImg
+                        }
                         className="w-16 h-16 rounded-2xl object-cover bg-slate-100 border"
                         alt="User"
                         referrerPolicy="no-referrer"
                         onError={(e) => {
-                          e.target.onerror = null; 
+                          e.target.onerror = null;
                           e.target.src = defaultImg;
                         }}
                       />
@@ -245,11 +254,15 @@ const ScholarshipDetails = () => {
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                           <div>
                             <p className="font-black text-slate-800 text-lg">
-                              {review.reviewerName || review.userName || "Scholarship Student"}
+                              {review.reviewerName ||
+                                review.userName ||
+                                "Scholarship Student"}
                             </p>
                             <p className="text-xs text-slate-400 font-bold uppercase">
                               {review.reviewDate
-                                ? new Date(review.reviewDate).toLocaleDateString()
+                                ? new Date(
+                                    review.reviewDate
+                                  ).toLocaleDateString()
                                 : "Recent"}
                             </p>
                           </div>

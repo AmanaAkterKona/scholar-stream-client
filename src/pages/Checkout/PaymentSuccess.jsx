@@ -1,6 +1,6 @@
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import useAxiosSecure from "../../hooks/useAxiosSecute";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import { FaCheckCircle, FaSpinner, FaArrowRight } from "react-icons/fa";
 
@@ -17,12 +17,10 @@ const PaymentSuccess = () => {
     const confirmPayment = async () => {
       try {
         if (sessionId) {
-   
           await axiosSecure.patch(`/payment-success?session_id=${sessionId}`);
-          
-        
+
           await new Promise((resolve) => setTimeout(resolve, 3500));
-          
+
           navigate("/dashboard/my-applications", { replace: true });
         }
       } catch (error) {
@@ -38,13 +36,11 @@ const PaymentSuccess = () => {
 
   return (
     <div className="min-h-screen bg-[#f0f9ff] flex items-center justify-center px-4 overflow-hidden relative">
-      
       {/* Background Decorative Elements */}
       <div className="absolute top-[-10%] left-[-10%] w-72 h-72 bg-teal-100 rounded-full blur-3xl opacity-60 animate-pulse"></div>
       <div className="absolute bottom-[-10%] right-[-10%] w-72 h-72 bg-blue-100 rounded-full blur-3xl opacity-60 animate-pulse"></div>
 
       <div className="max-w-md w-full bg-white rounded-[40px] shadow-[0_20px_50px_rgba(0,0,0,0.1)] p-10 text-center border border-white relative z-10 animate-in fade-in zoom-in duration-700">
-        
         {/* Success Icon with Pulse Effect */}
         <div className="flex justify-center mb-8">
           <div className="relative">
@@ -60,7 +56,8 @@ const PaymentSuccess = () => {
           Payment Success!
         </h2>
         <p className="text-slate-500 font-medium leading-relaxed mb-8">
-          Your application has been received. We're redirecting you to your dashboard shortly.
+          Your application has been received. We're redirecting you to your
+          dashboard shortly.
         </p>
 
         {/* Info Box */}
@@ -79,7 +76,7 @@ const PaymentSuccess = () => {
             <FaSpinner className="animate-spin text-xl" />
             <span className="text-sm">Finalizing Details...</span>
           </div>
-          
+
           <div className="flex items-center justify-center gap-2 text-slate-400 text-[11px] font-semibold">
             <span>Redirecting to My Applications</span>
             <FaArrowRight className="animate-bounce-x" />
@@ -93,7 +90,9 @@ const PaymentSuccess = () => {
       </div>
 
       {/* Internal CSS for Custom Animations */}
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         @keyframes progress {
           0% { width: 0%; }
           100% { width: 100%; }
@@ -108,7 +107,9 @@ const PaymentSuccess = () => {
         .animate-bounce-x {
           animation: bounce-x 1s infinite;
         }
-      `}} />
+      `,
+        }}
+      />
     </div>
   );
 };

@@ -2,7 +2,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { FaSearch, FaMapMarkerAlt, FaGraduationCap, FaCalendarAlt, FaDollarSign } from "react-icons/fa";
+import {
+  FaSearch,
+  FaMapMarkerAlt,
+  FaGraduationCap,
+  FaCalendarAlt,
+  FaDollarSign,
+} from "react-icons/fa";
 
 const AllScholarships = () => {
   const [scholarships, setScholarships] = useState([]);
@@ -14,11 +20,13 @@ const AllScholarships = () => {
   const navigate = useNavigate();
 
   const fetchScholarships = async () => {
-  
     try {
-      const res = await axios.get("http://localhost:3000/scholarships", {
-        params: { search, category, country },
-      });
+      const res = await axios.get(
+        "https://scholar-stream-server-alpha.vercel.app/scholarships",
+        {
+          params: { search, category, country },
+        }
+      );
       setScholarships(res.data);
     } catch (err) {
       console.error(err);
@@ -27,28 +35,25 @@ const AllScholarships = () => {
     }
   };
 
-
   useEffect(() => {
     fetchScholarships();
   }, [search, category, country]);
 
   return (
     <div className="min-h-screen bg-[#f8fdff] pb-20">
- 
       <div className="bg-gradient-to-r from-[#e0f7fa] to-[#b2ebf2] py-16 px-6 text-center">
         <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">
           Explore <span className="text-[#008080]">Scholarships</span>
         </h2>
         <p className="text-slate-600 max-w-xl mx-auto">
-          Find the best financial opportunities from top-ranked universities worldwide.
+          Find the best financial opportunities from top-ranked universities
+          worldwide.
         </p>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 -mt-10">
-        
         {/* Search & Filters Card */}
         <div className="bg-white p-6 rounded-[30px] shadow-xl shadow-cyan-100/50 border border-white flex flex-col lg:flex-row gap-4 mb-12">
-          
           {/* ✅ AUTO SEARCH INPUT */}
           <div className="flex-1 relative">
             <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -56,11 +61,11 @@ const AllScholarships = () => {
               type="text"
               placeholder="Search by Name, University or Degree..."
               value={search}
-              onChange={(e) => setSearch(e.target.value)} 
-              className="w-full pl-12 pr-4 py-4 rounded-2xl bg-slate-50 border-none focus:ring-2 focus:ring-cyan-400 transition-all outline-none text-slate-800 font-medium" 
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full pl-12 pr-4 py-4 rounded-2xl bg-slate-50 border-none focus:ring-2 focus:ring-cyan-400 transition-all outline-none text-slate-800 font-medium"
             />
           </div>
-          
+
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
@@ -95,40 +100,56 @@ const AllScholarships = () => {
               >
                 <div className="flex items-center gap-5 mb-8">
                   <div className="w-16 h-16 rounded-2xl overflow-hidden bg-slate-50 shrink-0 shadow-inner">
-                    <img src={sch.universityImage} alt="" className="w-full h-full object-cover" />
+                    <img
+                      src={sch.universityImage}
+                      alt=""
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <div className="overflow-hidden">
                     <h3 className="font-bold text-lg text-slate-800 leading-tight group-hover:text-[#008080] transition-colors truncate">
                       {sch.scholarshipName}
                     </h3>
-                    <p className="text-xs font-bold text-cyan-600 mt-1 uppercase tracking-wider truncate">{sch.universityName}</p>
+                    <p className="text-xs font-bold text-cyan-600 mt-1 uppercase tracking-wider truncate">
+                      {sch.universityName}
+                    </p>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 mb-8">
                   <div className="flex flex-col gap-1">
                     <span className="text-[10px] font-bold text-slate-400 uppercase flex items-center gap-1">
-                       <FaGraduationCap className="text-cyan-500" /> Category
+                      <FaGraduationCap className="text-cyan-500" /> Category
                     </span>
-                    <span className="text-sm font-bold text-slate-700">{sch.scholarshipCategory}</span>
+                    <span className="text-sm font-bold text-slate-700">
+                      {sch.scholarshipCategory}
+                    </span>
                   </div>
                   <div className="flex flex-col gap-1 border-l pl-4 border-slate-100">
                     <span className="text-[10px] font-bold text-slate-400 uppercase flex items-center gap-1">
-                       <FaMapMarkerAlt className="text-cyan-500" /> Location
+                      <FaMapMarkerAlt className="text-cyan-500" /> Location
                     </span>
-                    <span className="text-sm font-bold text-slate-700 truncate">{sch.universityCountry}</span>
+                    <span className="text-sm font-bold text-slate-700 truncate">
+                      {sch.universityCountry}
+                    </span>
                   </div>
                 </div>
 
                 <div className="space-y-3 mb-8 bg-slate-50 p-4 rounded-2xl">
                   <div className="flex justify-between items-center text-sm">
-                    <span className="text-slate-500 flex items-center gap-2"><FaDollarSign /> App Fee:</span>
-                    <span className="font-black text-slate-800">${sch.applicationFees || "0"}</span>
+                    <span className="text-slate-500 flex items-center gap-2">
+                      <FaDollarSign /> App Fee:
+                    </span>
+                    <span className="font-black text-slate-800">
+                      ${sch.applicationFees || "0"}
+                    </span>
                   </div>
                   <div className="flex justify-between items-center text-sm">
-                    <span className="text-slate-500 flex items-center gap-2"><FaCalendarAlt /> Deadline:</span>
+                    <span className="text-slate-500 flex items-center gap-2">
+                      <FaCalendarAlt /> Deadline:
+                    </span>
                     <span className="font-bold text-slate-700">
-                       {new Date(sch.applicationDeadline).toLocaleDateString()}
+                      {new Date(sch.applicationDeadline).toLocaleDateString()}
                     </span>
                   </div>
                 </div>
@@ -144,7 +165,9 @@ const AllScholarships = () => {
           </div>
         ) : (
           <div className="text-center py-20 bg-white rounded-[40px] shadow-sm">
-            <p className="text-slate-400 text-lg italic">No scholarships found matching your criteria.</p>
+            <p className="text-slate-400 text-lg italic">
+              No scholarships found matching your criteria.
+            </p>
           </div>
         )}
       </div>

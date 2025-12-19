@@ -1,19 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import Swal from 'sweetalert2';
-import { 
-  FileText, Mail, Building2, Search, Filter, 
-  CheckCircle, XCircle, Clock, Eye, MessageSquare 
-} from 'lucide-react';
-import useAxiosSecure from '../../../hooks/useAxiosSecute';
+import Swal from "sweetalert2";
+import {
+  FileText,
+  Mail,
+  Building2,
+  Search,
+  Filter,
+  CheckCircle,
+  XCircle,
+  Clock,
+  Eye,
+  MessageSquare,
+} from "lucide-react";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ManageApplications = () => {
   const axiosSecure = useAxiosSecure();
   const [applications, setApplications] = useState([]);
   const [filteredApplications, setFilteredApplications] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filterStatus, setFilterStatus] = useState('all');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterStatus, setFilterStatus] = useState("all");
   const [selectedApp, setSelectedApp] = useState(null);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
@@ -24,18 +32,18 @@ const ManageApplications = () => {
 
   const fetchApplications = async () => {
     try {
-      const response = await axiosSecure.get('/applications');
+      const response = await axiosSecure.get("/applications");
       setApplications(response.data);
       setFilteredApplications(response.data);
       setLoading(false);
     } catch (error) {
-      console.error('Error fetching applications:', error);
+      console.error("Error fetching applications:", error);
       setLoading(false);
       Swal.fire({
-        icon: 'error',
-        title: 'Failed to Load',
-        text: 'Unable to fetch applications. Please try again.',
-        confirmButtonColor: '#6366F1',
+        icon: "error",
+        title: "Failed to Load",
+        text: "Unable to fetch applications. Please try again.",
+        confirmButtonColor: "#6366F1",
       });
     }
   };
@@ -53,8 +61,11 @@ const ManageApplications = () => {
       );
     }
 
-    if (filterStatus !== 'all') {
-      result = result.filter((app) => app.applicationStatus?.toLowerCase() === filterStatus.toLowerCase());
+    if (filterStatus !== "all") {
+      result = result.filter(
+        (app) =>
+          app.applicationStatus?.toLowerCase() === filterStatus.toLowerCase()
+      );
     }
 
     setFilteredApplications(result);
@@ -79,28 +90,28 @@ const ManageApplications = () => {
 
     try {
       await axiosSecure.patch(`/applications/${selectedApp._id}`, { feedback });
-      
+
       setApplications(
         applications.map((app) =>
           app._id === selectedApp._id ? { ...app, feedback } : app
         )
       );
-      
+
       setShowFeedbackModal(false);
       Swal.fire({
-        icon: 'success',
-        title: 'Feedback Submitted!',
-        text: 'Feedback has been added successfully.',
-        confirmButtonColor: '#10B981',
+        icon: "success",
+        title: "Feedback Submitted!",
+        text: "Feedback has been added successfully.",
+        confirmButtonColor: "#10B981",
         timer: 2000,
-        showConfirmButton: false
+        showConfirmButton: false,
       });
     } catch (error) {
       Swal.fire({
-        icon: 'error',
-        title: 'Failed!',
-        text: 'Unable to submit feedback.',
-        confirmButtonColor: '#EF4444',
+        icon: "error",
+        title: "Failed!",
+        text: "Unable to submit feedback.",
+        confirmButtonColor: "#EF4444",
       });
     }
   };
@@ -108,30 +119,30 @@ const ManageApplications = () => {
   // Update Status
   const handleStatusUpdate = async (appId, newStatus) => {
     try {
-      await axiosSecure.patch(`/applications/${appId}`, { 
-        applicationStatus: newStatus 
+      await axiosSecure.patch(`/applications/${appId}`, {
+        applicationStatus: newStatus,
       });
-      
+
       setApplications(
         applications.map((app) =>
           app._id === appId ? { ...app, applicationStatus: newStatus } : app
         )
       );
-      
+
       Swal.fire({
-        icon: 'success',
-        title: 'Status Updated!',
+        icon: "success",
+        title: "Status Updated!",
         text: `Application status changed to ${newStatus}`,
-        confirmButtonColor: '#10B981',
+        confirmButtonColor: "#10B981",
         timer: 2000,
-        showConfirmButton: false
+        showConfirmButton: false,
       });
     } catch (error) {
       Swal.fire({
-        icon: 'error',
-        title: 'Failed!',
-        text: 'Unable to update status.',
-        confirmButtonColor: '#EF4444',
+        icon: "error",
+        title: "Failed!",
+        text: "Unable to update status.",
+        confirmButtonColor: "#EF4444",
       });
     }
   };
@@ -139,17 +150,17 @@ const ManageApplications = () => {
   // Cancel Application
   const handleCancel = (appId, userName) => {
     Swal.fire({
-      title: '⚠️ Cancel Application?',
+      title: "⚠️ Cancel Application?",
       html: `Are you sure you want to reject <strong>${userName}'s</strong> application?`,
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#EF4444',
-      cancelButtonColor: '#94A3B8',
-      confirmButtonText: '🗑️ Yes, Reject',
-      cancelButtonText: '✕ Cancel',
+      confirmButtonColor: "#EF4444",
+      cancelButtonColor: "#94A3B8",
+      confirmButtonText: "🗑️ Yes, Reject",
+      cancelButtonText: "✕ Cancel",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await handleStatusUpdate(appId, 'rejected');
+        await handleStatusUpdate(appId, "rejected");
       }
     });
   };
@@ -157,10 +168,14 @@ const ManageApplications = () => {
   // Get status badge
   const getStatusBadge = (status) => {
     const badges = {
-      pending: 'bg-gradient-to-r from-yellow-100 to-amber-100 text-yellow-700 border border-yellow-200',
-      processing: 'bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-700 border border-blue-200',
-      completed: 'bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 border border-green-200',
-      rejected: 'bg-gradient-to-r from-red-100 to-rose-100 text-red-700 border border-red-200',
+      pending:
+        "bg-gradient-to-r from-yellow-100 to-amber-100 text-yellow-700 border border-yellow-200",
+      processing:
+        "bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-700 border border-blue-200",
+      completed:
+        "bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 border border-green-200",
+      rejected:
+        "bg-gradient-to-r from-red-100 to-rose-100 text-red-700 border border-red-200",
     };
     return badges[status?.toLowerCase()] || badges.pending;
   };
@@ -184,7 +199,9 @@ const ManageApplications = () => {
             <FileText className="w-8 h-8 text-indigo-600" />
           </div>
         </div>
-        <p className="mt-4 text-slate-600 font-medium animate-pulse">Loading applications...</p>
+        <p className="mt-4 text-slate-600 font-medium animate-pulse">
+          Loading applications...
+        </p>
       </div>
     );
   }
@@ -192,7 +209,6 @@ const ManageApplications = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50 to-purple-50 p-6">
       <div className="max-w-7xl mx-auto">
-        
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-3">
@@ -203,7 +219,9 @@ const ManageApplications = () => {
               <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
                 Manage Applications
               </h1>
-              <p className="text-slate-600 mt-1">Review, provide feedback, and update application status</p>
+              <p className="text-slate-600 mt-1">
+                Review, provide feedback, and update application status
+              </p>
             </div>
           </div>
         </div>
@@ -213,8 +231,12 @@ const ManageApplications = () => {
           <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-slate-600 text-sm font-semibold mb-1">Total</p>
-                <p className="text-3xl font-bold text-slate-800">{applications.length}</p>
+                <p className="text-slate-600 text-sm font-semibold mb-1">
+                  Total
+                </p>
+                <p className="text-3xl font-bold text-slate-800">
+                  {applications.length}
+                </p>
               </div>
               <div className="bg-gradient-to-br from-indigo-500 to-purple-500 p-3 rounded-xl">
                 <FileText className="w-6 h-6 text-white" />
@@ -225,9 +247,15 @@ const ManageApplications = () => {
           <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-slate-600 text-sm font-semibold mb-1">Pending</p>
+                <p className="text-slate-600 text-sm font-semibold mb-1">
+                  Pending
+                </p>
                 <p className="text-3xl font-bold text-yellow-600">
-                  {applications.filter(a => a.applicationStatus === 'pending').length}
+                  {
+                    applications.filter(
+                      (a) => a.applicationStatus === "pending"
+                    ).length
+                  }
                 </p>
               </div>
               <div className="bg-gradient-to-br from-yellow-500 to-amber-500 p-3 rounded-xl">
@@ -239,9 +267,15 @@ const ManageApplications = () => {
           <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-slate-600 text-sm font-semibold mb-1">Processing</p>
+                <p className="text-slate-600 text-sm font-semibold mb-1">
+                  Processing
+                </p>
                 <p className="text-3xl font-bold text-blue-600">
-                  {applications.filter(a => a.applicationStatus === 'processing').length}
+                  {
+                    applications.filter(
+                      (a) => a.applicationStatus === "processing"
+                    ).length
+                  }
                 </p>
               </div>
               <div className="bg-gradient-to-br from-blue-500 to-cyan-500 p-3 rounded-xl">
@@ -253,9 +287,15 @@ const ManageApplications = () => {
           <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-slate-600 text-sm font-semibold mb-1">Completed</p>
+                <p className="text-slate-600 text-sm font-semibold mb-1">
+                  Completed
+                </p>
                 <p className="text-3xl font-bold text-green-600">
-                  {applications.filter(a => a.applicationStatus === 'completed').length}
+                  {
+                    applications.filter(
+                      (a) => a.applicationStatus === "completed"
+                    ).length
+                  }
                 </p>
               </div>
               <div className="bg-gradient-to-br from-green-500 to-emerald-500 p-3 rounded-xl">
@@ -295,7 +335,9 @@ const ManageApplications = () => {
             </div>
 
             <div className="flex items-center px-6 py-4 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-xl shadow-lg">
-              <span className="font-bold text-lg">{filteredApplications.length}</span>
+              <span className="font-bold text-lg">
+                {filteredApplications.length}
+              </span>
               <span className="ml-2 font-medium">Results</span>
             </div>
           </div>
@@ -307,12 +349,24 @@ const ManageApplications = () => {
             <table className="w-full">
               <thead className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white">
                 <tr>
-                  <th className="px-6 py-4 text-left text-sm font-bold">Applicant</th>
-                  <th className="px-6 py-4 text-left text-sm font-bold">University</th>
-                  <th className="px-6 py-4 text-left text-sm font-bold">Status</th>
-                  <th className="px-6 py-4 text-left text-sm font-bold">Payment</th>
-                  <th className="px-6 py-4 text-left text-sm font-bold">Feedback</th>
-                  <th className="px-6 py-4 text-center text-sm font-bold">Actions</th>
+                  <th className="px-6 py-4 text-left text-sm font-bold">
+                    Applicant
+                  </th>
+                  <th className="px-6 py-4 text-left text-sm font-bold">
+                    University
+                  </th>
+                  <th className="px-6 py-4 text-left text-sm font-bold">
+                    Status
+                  </th>
+                  <th className="px-6 py-4 text-left text-sm font-bold">
+                    Payment
+                  </th>
+                  <th className="px-6 py-4 text-left text-sm font-bold">
+                    Feedback
+                  </th>
+                  <th className="px-6 py-4 text-center text-sm font-bold">
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200">
@@ -320,16 +374,25 @@ const ManageApplications = () => {
                   <tr>
                     <td colSpan="6" className="px-6 py-16 text-center">
                       <FileText className="w-16 h-16 text-slate-300 mx-auto mb-4" />
-                      <p className="text-xl font-bold text-slate-700 mb-2">No Applications Found</p>
-                      <p className="text-slate-500">Try adjusting your search or filters</p>
+                      <p className="text-xl font-bold text-slate-700 mb-2">
+                        No Applications Found
+                      </p>
+                      <p className="text-slate-500">
+                        Try adjusting your search or filters
+                      </p>
                     </td>
                   </tr>
                 ) : (
                   filteredApplications.map((app) => (
-                    <tr key={app._id} className="hover:bg-gradient-to-r hover:from-indigo-50/50 hover:to-purple-50/50 transition-all">
+                    <tr
+                      key={app._id}
+                      className="hover:bg-gradient-to-r hover:from-indigo-50/50 hover:to-purple-50/50 transition-all"
+                    >
                       <td className="px-6 py-4">
                         <div>
-                          <div className="font-bold text-slate-800">{app.userName}</div>
+                          <div className="font-bold text-slate-800">
+                            {app.userName}
+                          </div>
                           <div className="text-sm text-slate-500 flex items-center gap-1">
                             <Mail className="w-3 h-3" />
                             {app.userEmail}
@@ -339,28 +402,38 @@ const ManageApplications = () => {
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
                           <Building2 className="w-4 h-4 text-indigo-600" />
-                          <span className="font-medium text-slate-700">{app.universityName}</span>
+                          <span className="font-medium text-slate-700">
+                            {app.universityName}
+                          </span>
                         </div>
-                        <div className="text-xs text-slate-500 mt-1">{app.degree}</div>
+                        <div className="text-xs text-slate-500 mt-1">
+                          {app.degree}
+                        </div>
                       </td>
                       <td className="px-6 py-4">
-                        <span className={`inline-flex items-center gap-2 px-3 py-1 rounded-xl text-xs font-bold uppercase ${getStatusBadge(app.applicationStatus)}`}>
+                        <span
+                          className={`inline-flex items-center gap-2 px-3 py-1 rounded-xl text-xs font-bold uppercase ${getStatusBadge(
+                            app.applicationStatus
+                          )}`}
+                        >
                           {getStatusIcon(app.applicationStatus)}
-                          {app.applicationStatus || 'pending'}
+                          {app.applicationStatus || "pending"}
                         </span>
                       </td>
                       <td className="px-6 py-4">
-                        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                          app.paymentStatus === 'paid' 
-                            ? 'bg-green-100 text-green-700' 
-                            : 'bg-red-100 text-red-700'
-                        }`}>
-                          {app.paymentStatus || 'unpaid'}
+                        <span
+                          className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                            app.paymentStatus === "paid"
+                              ? "bg-green-100 text-green-700"
+                              : "bg-red-100 text-red-700"
+                          }`}
+                        >
+                          {app.paymentStatus || "unpaid"}
                         </span>
                       </td>
                       <td className="px-6 py-4">
                         <div className="text-sm text-slate-600 max-w-xs truncate">
-                          {app.feedback || 'No feedback yet'}
+                          {app.feedback || "No feedback yet"}
                         </div>
                       </td>
                       <td className="px-6 py-4">
@@ -380,8 +453,10 @@ const ManageApplications = () => {
                             <MessageSquare className="w-4 h-4" />
                           </button>
                           <select
-                            value={app.applicationStatus || 'pending'}
-                            onChange={(e) => handleStatusUpdate(app._id, e.target.value)}
+                            value={app.applicationStatus || "pending"}
+                            onChange={(e) =>
+                              handleStatusUpdate(app._id, e.target.value)
+                            }
                             className="px-3 py-2 text-xs font-semibold border-2 border-slate-200 rounded-lg cursor-pointer hover:border-indigo-400 transition-all text-gray-600"
                           >
                             <option value="pending">Pending</option>
@@ -404,7 +479,6 @@ const ManageApplications = () => {
             </table>
           </div>
         </div>
-
       </div>
 
       {/* Details Modal */}
@@ -414,55 +488,93 @@ const ManageApplications = () => {
             <div className="sticky top-0 bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-6 rounded-t-2xl">
               <h2 className="text-2xl font-bold">Application Details</h2>
             </div>
-            
+
             <div className="p-6 space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-semibold text-slate-600">Applicant Name</label>
-                  <p className="text-lg font-bold text-slate-800">{selectedApp.userName}</p>
+                  <label className="text-sm font-semibold text-slate-600">
+                    Applicant Name
+                  </label>
+                  <p className="text-lg font-bold text-slate-800">
+                    {selectedApp.userName}
+                  </p>
                 </div>
                 <div>
-                  <label className="text-sm font-semibold text-slate-600">Email</label>
-                  <p className="text-lg text-slate-700">{selectedApp.userEmail}</p>
+                  <label className="text-sm font-semibold text-slate-600">
+                    Email
+                  </label>
+                  <p className="text-lg text-slate-700">
+                    {selectedApp.userEmail}
+                  </p>
                 </div>
                 <div>
-                  <label className="text-sm font-semibold text-slate-600">University</label>
-                  <p className="text-lg text-slate-700">{selectedApp.universityName}</p>
+                  <label className="text-sm font-semibold text-slate-600">
+                    University
+                  </label>
+                  <p className="text-lg text-slate-700">
+                    {selectedApp.universityName}
+                  </p>
                 </div>
                 <div>
-                  <label className="text-sm font-semibold text-slate-600">Degree</label>
+                  <label className="text-sm font-semibold text-slate-600">
+                    Degree
+                  </label>
                   <p className="text-lg text-slate-700">{selectedApp.degree}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-semibold text-slate-600">Category</label>
-                  <p className="text-lg text-slate-700">{selectedApp.scholarshipCategory}</p>
+                  <label className="text-sm font-semibold text-slate-600">
+                    Category
+                  </label>
+                  <p className="text-lg text-slate-700">
+                    {selectedApp.scholarshipCategory}
+                  </p>
                 </div>
                 <div>
-                  <label className="text-sm font-semibold text-slate-600">Application Fee</label>
-                  <p className="text-lg font-bold text-green-600">${selectedApp.applicationFees}</p>
+                  <label className="text-sm font-semibold text-slate-600">
+                    Application Fee
+                  </label>
+                  <p className="text-lg font-bold text-green-600">
+                    ${selectedApp.applicationFees}
+                  </p>
                 </div>
                 <div>
-                  <label className="text-sm font-semibold text-slate-600">Service Charge</label>
-                  <p className="text-lg text-slate-700">${selectedApp.serviceCharge}</p>
+                  <label className="text-sm font-semibold text-slate-600">
+                    Service Charge
+                  </label>
+                  <p className="text-lg text-slate-700">
+                    ${selectedApp.serviceCharge}
+                  </p>
                 </div>
                 <div>
-                  <label className="text-sm font-semibold text-slate-600">Payment Status</label>
-                  <p className="text-lg font-semibold text-green-600 capitalize">{selectedApp.paymentStatus}</p>
+                  <label className="text-sm font-semibold text-slate-600">
+                    Payment Status
+                  </label>
+                  <p className="text-lg font-semibold text-green-600 capitalize">
+                    {selectedApp.paymentStatus}
+                  </p>
                 </div>
                 <div>
-                  <label className="text-sm font-semibold text-slate-600">Application Status</label>
-                  <p className="text-lg font-semibold text-indigo-600 capitalize">{selectedApp.applicationStatus}</p>
+                  <label className="text-sm font-semibold text-slate-600">
+                    Application Status
+                  </label>
+                  <p className="text-lg font-semibold text-indigo-600 capitalize">
+                    {selectedApp.applicationStatus}
+                  </p>
                 </div>
                 <div>
-                  <label className="text-sm font-semibold text-slate-600">Application Date</label>
+                  <label className="text-sm font-semibold text-slate-600">
+                    Application Date
+                  </label>
                   <p className="text-lg text-slate-700">
                     {new Date(selectedApp.applicationDate).toLocaleDateString()}
                   </p>
                 </div>
                 <div className="col-span-2">
-                  <label className="text-sm font-semibold text-slate-600">Feedback</label>
+                  <label className="text-sm font-semibold text-slate-600">
+                    Feedback
+                  </label>
                   <p className="text-slate-700 bg-slate-50 p-3 rounded-lg">
-                    {selectedApp.feedback || 'No feedback provided yet'}
+                    {selectedApp.feedback || "No feedback provided yet"}
                   </p>
                 </div>
               </div>
@@ -486,9 +598,11 @@ const ManageApplications = () => {
           <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full">
             <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-6 rounded-t-2xl">
               <h2 className="text-2xl font-bold">Add Feedback</h2>
-              <p className="text-white/80 text-sm mt-1">For {selectedApp.userName}</p>
+              <p className="text-white/80 text-sm mt-1">
+                For {selectedApp.userName}
+              </p>
             </div>
-            
+
             <form onSubmit={handleSubmitFeedback} className="p-6 text-gray-600">
               <textarea
                 name="feedback"
@@ -517,7 +631,6 @@ const ManageApplications = () => {
           </div>
         </div>
       )}
-
     </div>
   );
 };

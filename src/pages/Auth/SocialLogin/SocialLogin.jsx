@@ -3,49 +3,46 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router";
 
 import useAuth from "../../../hooks/useAuth";
-import useAxiosSecure from "../../../hooks/useAxiosSecute";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const SocialLogin = () => {
+  const { signInGoogle } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const location = useLocation();
+  const navigate = useNavigate();
+  // console.log('location in social', location)
 
-    const {signInGoogle} = useAuth();
-    const axiosSecure = useAxiosSecure();
-    const location = useLocation();
-    const navigate = useNavigate();
-    // console.log('location in social', location)
-       
-    const handleGoogleSignIn = () =>{
-        signInGoogle()
-        .then(result => {
-            console.log(result.user);
-            
-               
-            //create user in the database
-            const userInfo = {
-                email: result.user.email,
-                displayName: result.user.displayName,
-                photoURL : result.user.photoURL
-            }
-            
-            axiosSecure.post('/users', userInfo )
-            .then(res => {
-                console.log('user data has been stored', res.data)
-                navigate(location.state || '/');
-            })
-        })
-        .catch(error => {
-            console.log(error)
-        })
-    }
+  const handleGoogleSignIn = () => {
+    signInGoogle()
+      .then((result) => {
+        console.log(result.user);
+
+        //create user in the database
+        const userInfo = {
+          email: result.user.email,
+          displayName: result.user.displayName,
+          photoURL: result.user.photoURL,
+        };
+
+        axiosSecure.post("/users", userInfo).then((res) => {
+          console.log("user data has been stored", res.data);
+          navigate(location.state || "/");
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="text-center pb-8 text-gray-700 font-semibold">
       <p className="mb-2">OR</p>
 
       {/* Google */}
-      <button 
-      
-      onClick={handleGoogleSignIn}
-      className="btn bg-white text-black border-[#e5e5e5]">
+      <button
+        onClick={handleGoogleSignIn}
+        className="btn bg-white text-black border-[#e5e5e5]"
+      >
         <svg
           aria-label="Google logo"
           width="16"
