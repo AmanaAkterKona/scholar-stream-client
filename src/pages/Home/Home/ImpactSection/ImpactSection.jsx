@@ -1,6 +1,6 @@
 // src/pages/Home/ImpactSection/ImpactSection.jsx
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // ১. useNavigate ইম্পোর্ট করুন
+import { useNavigate } from 'react-router-dom'; 
 import { FaUsers, FaUniversity, FaGraduationCap, FaGlobeAmericas } from 'react-icons/fa';
 
 const stats = [
@@ -11,7 +11,7 @@ const stats = [
 ];
 
 const ImpactSection = () => {
-  const navigate = useNavigate(); // ২. ফাংশনটি কল করুন
+  const navigate = useNavigate(); 
 
   return (
     <div className="py-24 px-6 bg-white relative overflow-hidden">
@@ -52,7 +52,7 @@ const ImpactSection = () => {
               <h3 className="text-2xl md:text-3xl font-bold text-slate-800">Ready to start your journey?</h3>
               <p className="text-slate-500 mt-2">Join thousands of students and find your dream scholarship today.</p>
             </div>
-            {/* ৩. বাটন এ ক্লিক ইভেন্ট যোগ করা হলো */}
+            
             <button 
               onClick={() => navigate('/scholarships')}
               className="whitespace-nowrap px-10 py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-slate-800 transition-all shadow-lg active:scale-95"

@@ -21,7 +21,7 @@ const ManageScholarships = () => {
   const [editingScholarship, setEditingScholarship] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
 
-  // Fetch scholarships (আপনার অরিজিনাল ফাংশনালিটি)
+  // Fetch scholarships 
   useEffect(() => {
     fetchScholarships();
   }, []);
@@ -38,7 +38,7 @@ const ManageScholarships = () => {
     }
   };
 
-  // Search and filter (আপনার অরিজিনাল লজিক)
+  // Search and filter 
   useEffect(() => {
     let result = scholarships;
     if (searchTerm) {
@@ -98,7 +98,7 @@ const ManageScholarships = () => {
     }
   };
 
-  // Premium UI Styles (টেক্সট স্পষ্ট করার জন্য)
+  // Premium UI Styles 
   const inputStyle =
     "w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 font-bold placeholder:text-slate-400 focus:border-[#008080] focus:ring-2 focus:ring-[#008080]/10 outline-none transition-all";
   const labelStyle =

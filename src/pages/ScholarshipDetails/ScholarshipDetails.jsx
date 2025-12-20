@@ -41,7 +41,7 @@ const ScholarshipDetails = () => {
     reviewComment: "",
   });
 
-  // ✅ ১. নির্ভরযোগ্য ডিফল্ট ইমেজ লিঙ্ক
+  
   const defaultImg = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
 
   const loadData = async () => {
@@ -65,14 +65,14 @@ const ScholarshipDetails = () => {
     e.preventDefault();
     if (!user) return alert("Please log in to submit a review.");
 
-    // ✅ ২. সাবমিট করার সময় ইমেজ ও নাম নিশ্চিত করা
+    
     const newReview = {
       scholarshipId: id,
       reviewerName:
         user?.displayName ||
         user?.email?.split("@")[0] ||
         "Scholarship Student",
-      reviewerImage: user?.photoURL || defaultImg, // যদি প্রোফাইলে ছবি না থাকে তবে ডিফল্ট যাবে
+      reviewerImage: user?.photoURL || defaultImg, 
       ratingPoint: parseInt(reviewInput.ratingPoint),
       reviewComment: reviewInput.reviewComment,
       universityName: scholarship?.universityName,
@@ -84,7 +84,7 @@ const ScholarshipDetails = () => {
       if (res.data.insertedId) {
         alert("Review Posted!");
         setReviewInput({ ratingPoint: 5, reviewComment: "" });
-        loadData(); // রিভিউ লিস্ট আপডেট হবে
+        loadData(); 
       }
     } catch (error) {
       console.error("Review submit error:", error);
@@ -237,7 +237,7 @@ const ScholarshipDetails = () => {
                     className="p-8 rounded-[30px] border border-slate-50 bg-white shadow-sm"
                   >
                     <div className="flex flex-col sm:flex-row gap-6">
-                      {/* ✅ ৩. ইমেজ ডিসপ্লে লজিক উইথ এরর হ্যান্ডলিং */}
+                      
                       <img
                         src={
                           review.reviewerImage || review.userImage || defaultImg

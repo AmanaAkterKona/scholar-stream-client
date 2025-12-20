@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 const PaymentFailed = () => {
   const location = useLocation();
 
-  // Stripe cancel হলে state নাও থাকতে পারে
+  // Stripe cancel 
   const scholarshipId = location.state?.scholarshipId;
   const error = location.state?.error;
 

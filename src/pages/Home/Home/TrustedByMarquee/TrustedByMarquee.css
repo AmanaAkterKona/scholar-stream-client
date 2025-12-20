@@ -13,7 +13,7 @@
 }
 
 .marquee-logo {
-  height: 60px; /* বড় করা */
+  height: 60px; 
   object-fit: contain;
   filter: grayscale(70%);
   opacity: 0.7;
@@ -23,11 +23,11 @@
 .marquee-logo:hover {
   filter: grayscale(0%);
   opacity: 1;
-  transform: scale(1.1); /* hover effect */
+  transform: scale(1.1); 
 }
 
 .marquee:hover {
-  animation-play-state: paused; /* hover করলে pause */
+  animation-play-state: paused; 
 }
 
 @keyframes marquee {

@@ -2,11 +2,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaCheckCircle } from "react-icons/fa";
-import { useNavigate } from "react-router-dom"; // ১. useNavigate ইম্পোর্ট করুন
+import { useNavigate } from "react-router-dom"; 
 import img1 from "../../../../assets/student img.avif";
 
 const Banner = () => {
-  const navigate = useNavigate(); // ২. হুকটি ডিক্লেয়ার করুন
+  const navigate = useNavigate(); 
 
   return (
     <div className="w-full bg-[#e8f9fb] py-20 px-6 md:px-12 relative overflow-hidden">
@@ -38,11 +38,11 @@ const Banner = () => {
             </li>
           </ul>
 
-          {/* CTA Button – এখন এটি All Scholarships পেজে নিয়ে যাবে */}
+         
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/scholarships')} // ৩. ক্লিক ইভেন্ট সেট করুন
+            onClick={() => navigate('/scholarships')} 
             className="mt-10 px-8 py-3 
             bg-gradient-to-r from-[#37c4ef] to-[#1faed1]
             text-white text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all"

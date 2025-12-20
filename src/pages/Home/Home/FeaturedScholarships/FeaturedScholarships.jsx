@@ -33,7 +33,7 @@ const FeaturedScholarships = () => {
 
   return (
     <div className="py-20 px-6 bg-gradient-to-b from-[#e0f7fa] via-[#f8fdff] to-white relative overflow-hidden">
-      {/* সেন্টারে থাকা হেডার */}
+      
       <div className="max-w-7xl mx-auto flex flex-col items-center text-center mb-16">
         <div className="bg-[#00bcd4] text-white px-4 py-1 rounded-full flex items-center gap-2 text-xs font-bold mb-6 shadow-md">
           <FaTrophy className="text-[10px]" /> Top Rated Opportunities
@@ -48,7 +48,7 @@ const FeaturedScholarships = () => {
           Discover handpicked scholarships from top universities worldwide.
         </p>
 
-        {/* ✅ FIXED PATH: scholarships পেজে যাওয়ার জন্য */}
+        
         <button
           onClick={() => navigate("/scholarships")}
           className="px-10 py-4 bg-[#00bcd4] text-white font-black rounded-2xl shadow-xl shadow-cyan-200 hover:bg-[#0097a7] hover:-translate-y-1 transition-all duration-300 flex items-center gap-2"
@@ -119,7 +119,7 @@ const FeaturedScholarships = () => {
                   in {sch.universityCountry}."
                 </p>
 
-                {/* ✅ UPDATED BUTTON COLOR: Premium Deep Teal to match Skyblue bg */}
+                
                 <button
                   onClick={() => navigate(`/scholarships/${sch._id}`)}
                   className="w-full bg-[#008080] hover:bg-[#006666] text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-teal-100 flex justify-center items-center gap-2 mt-auto"

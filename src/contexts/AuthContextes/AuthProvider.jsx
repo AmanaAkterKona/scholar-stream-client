@@ -50,14 +50,14 @@ const AuthProvider = ({ children }) => {
 
       if (currentUser) {
         try {
-          // ✅ Check role from backend
+          
           const res = await axios.get(
             `https://scholar-stream-server-alpha.vercel.app/users/role?email=${currentUser.email}`
           );
 
           let role = "student"; // default role
 
-          // ✅ যদি user MongoDB তে না থাকে, তাহলে save করো
+          
           if (!res.data || !res.data.role) {
             await axios.post(
               "https://scholar-stream-server-alpha.vercel.app/users",
@@ -81,7 +81,7 @@ const AuthProvider = ({ children }) => {
         } catch (error) {
           console.error("Role fetch error:", error);
 
-          // ✅ Fallback: MongoDB তে user save করার চেষ্টা করো
+         
           try {
             await axios.post(
               "https://scholar-stream-server-alpha.vercel.app/users",

@@ -30,13 +30,13 @@ const MyApplications = () => {
     comment: "",
   });
 
-  // --- Helper functions ---
+  
   const isPending = (status) => status === "pending";
   const isPaid = (payment) => payment === "paid";
   const isCompleted = (status) => status === "completed";
   const isCancelled = (status) => status === "cancelled";
 
-  // Fetch applications
+  
   useEffect(() => {
     fetchApplications();
   }, [user]);
@@ -56,7 +56,7 @@ const MyApplications = () => {
     }
   };
 
-  // 🗑️ Delete Application
+  //  Delete Application
   const handleDeleteApplication = async (id) => {
     const isConfirmed = window.confirm(
       "Are you sure you want to DELETE this application PERMANENTLY?"
@@ -73,7 +73,7 @@ const MyApplications = () => {
     }
   };
 
-  // ✏️ Edit Setup
+  //  Edit Setup
   const handleEdit = (app) => {
     setSelectedApp(app);
     setEditData({
@@ -83,7 +83,7 @@ const MyApplications = () => {
     setShowEditModal(true);
   };
 
-  // ✅ Edit Submit
+  //  Edit Submit
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -289,7 +289,7 @@ const MyApplications = () => {
         </div>
       )}
 
-      {/* ✅ Updated Details Modal with Feedback Box */}
+      {/*  Updated Details Modal with Feedback Box */}
       {showDetailsModal && selectedApp && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">

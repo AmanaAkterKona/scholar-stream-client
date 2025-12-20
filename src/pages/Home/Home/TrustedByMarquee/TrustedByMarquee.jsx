@@ -1,5 +1,5 @@
 import React from "react";
-import "./TrustedByMarquee.css"; // CSS import করা হয়েছে
+import "./TrustedByMarquee.css"; 
 
 const logos = [
   "https://i.ibb.co.com/9HTsXRbg/logo1.png",

@@ -65,9 +65,9 @@ const Checkout = () => {
 
   return (
     <div className="max-w-xl mx-auto p-6">
-           {" "}
+      {" "}
       <h2 className="text-2xl font-bold mb-4">
-                Payment Details      {" "}
+         Payment Details {" "}
       </h2>
       <p>Application Fee: **${scholarship.applicationFees}**</p>
       <p>Service Charge: **${scholarship.serviceCharge}**</p>
@@ -75,14 +75,14 @@ const Checkout = () => {
         Total Payable: **$
         {scholarship.applicationFees + scholarship.serviceCharge}**
       </p>
-           {" "}
+      {" "}
       <button
         onClick={handlePayment}
         className="btn btn-primary text-black mt-4"
       >
-                Pay Now      {" "}
+         Pay Now {" "}
       </button>
-         {" "}
+      {" "}
     </div>
   );
 };

@@ -6,21 +6,22 @@ import Loader from '../../Loader/Loader';
 import TrustedByMarquee from './TrustedByMarquee/TrustedByMarquee';
 import FeaturedScholarships from './FeaturedScholarships/FeaturedScholarships';
 import ImpactSection from './ImpactSection/ImpactSection';
+import HowItWorks from './HowItWorks/HowItWorks';
 
 
 const Home = () => {
     const [loading, setLoading] = useState(true);
 
-    // ধরি এখানে Banner/SuccessStories data fetch করছি
+    
     useEffect(() => {
-        // Example: Simulate API call with setTimeout
+        
         setTimeout(() => {
-            setLoading(false); // Data আসার পর loading false হবে
-        }, 2000); // 2 seconds delay
+            setLoading(false); 
+        }, 2000); 
     }, []);
 
     if (loading) {
-        return <Loader />; // loading=true হলে spinner দেখাবে
+        return <Loader />; 
     }
 
     return (
@@ -30,6 +31,7 @@ const Home = () => {
             <SuccessStories />
             <FeaturedScholarships></FeaturedScholarships>
             <ImpactSection></ImpactSection>
+            <HowItWorks></HowItWorks>
             <SectionFAQ />
             <TrustedByMarquee></TrustedByMarquee>
         </div>

@@ -12,7 +12,7 @@ import {
 
 const AllScholarships = () => {
   const [scholarships, setScholarships] = useState([]);
-  const [search, setSearch] = useState(""); // সরাসরি সার্চ স্টেট
+  const [search, setSearch] = useState(""); 
   const [category, setCategory] = useState("");
   const [country, setCountry] = useState("");
   const [loading, setLoading] = useState(true);

@@ -20,7 +20,7 @@ const ManageUsers = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterRole, setFilterRole] = useState("all");
 
-  // Fetch users (আপনার অরিজিনাল লজিক)
+  // Fetch users 
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -43,7 +43,7 @@ const ManageUsers = () => {
     }
   };
 
-  // Search and filter (আপনার অরিজিনাল লজিক)
+  // Search and filter
   useEffect(() => {
     let result = users;
     if (searchTerm) {
@@ -173,7 +173,7 @@ const ManageUsers = () => {
           </div>
         </div>
 
-        {/* Stats Cards (আপনার অরিজিনাল ডিজাইন) */}
+        {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
           <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
             <div className="flex justify-between items-center">
