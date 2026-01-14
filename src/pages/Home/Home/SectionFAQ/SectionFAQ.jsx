@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, HelpCircle } from 'lucide-react';
+import useTheme from "../../Shared/useTheme"; // পাথটি ঠিক আছে কিনা দেখে নিও
 
 const SectionFAQ = () => {
   const [openIndex, setOpenIndex] = useState(0);
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
 
   const faqs = [
     {
@@ -37,7 +40,12 @@ const SectionFAQ = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-[#e8f8fb] to-[#f5fdff] py-20 px-6 md:px-12">
+    <div 
+      id="faq" 
+      className={`py-20 px-6 md:px-12 transition-colors duration-700 ${
+        isDark ? "bg-[#0f172a]" : "bg-gradient-to-br from-[#e8f8fb] to-[#f5fdff]"
+      }`}
+    >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
@@ -47,13 +55,17 @@ const SectionFAQ = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-[#37c4ef] rounded-full mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-[#37c4ef] rounded-full mb-4 shadow-lg shadow-cyan-500/20">
             <HelpCircle className="w-8 h-8 text-white" />
           </div>
-          <h2 className="text-5xl font-bold text-[#033044] mb-4">
+          <h2 className={`text-5xl font-extrabold mb-4 transition-colors ${
+            isDark ? "text-white" : "text-[#033044]"
+          }`}>
             Frequently <span className="text-[#37c4ef]">Asked Questions</span>
           </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          <p className={`text-lg max-w-2xl mx-auto transition-colors ${
+            isDark ? "text-slate-400" : "text-gray-600"
+          }`}>
             Find answers to common questions about our scholarship platform
           </p>
         </motion.div>
@@ -67,13 +79,21 @@ const SectionFAQ = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               viewport={{ once: true }}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
+                isDark 
+                ? "bg-[#1e293b] border-slate-700 shadow-slate-900/50 hover:shadow-cyan-900/10" 
+                : "bg-white border-transparent shadow-lg hover:shadow-xl"
+              }`}
             >
               <button
                 onClick={() => toggleFAQ(i)}
-                className="w-full p-6 flex justify-between items-start gap-4 text-left hover:bg-gradient-to-r hover:from-[#f0fbfd] hover:to-white transition-all duration-300"
+                className={`w-full p-6 flex justify-between items-start gap-4 text-left transition-all duration-300 ${
+                  isDark ? "hover:bg-slate-800" : "hover:bg-gradient-to-r hover:from-[#f0fbfd] hover:to-white"
+                }`}
               >
-                <h3 className="font-bold text-lg text-[#033044] flex-1 pr-2">
+                <h3 className={`font-bold text-lg flex-1 pr-2 transition-colors ${
+                  isDark ? "text-slate-100" : "text-[#033044]"
+                }`}>
                   {faq.q}
                 </h3>
                 <motion.div
@@ -84,7 +104,7 @@ const SectionFAQ = () => {
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-300 ${
                     openIndex === i 
                       ? 'bg-[#37c4ef] text-white' 
-                      : 'bg-gray-100 text-gray-600'
+                      : isDark ? 'bg-slate-700 text-slate-400' : 'bg-gray-100 text-gray-600'
                   }`}>
                     <ChevronDown className="w-5 h-5" />
                   </div>
@@ -101,8 +121,14 @@ const SectionFAQ = () => {
                     className="overflow-hidden"
                   >
                     <div className="px-6 pb-6">
-                      <div className="h-px bg-gradient-to-r from-transparent via-[#37c4ef] to-transparent mb-4"></div>
-                      <p className="text-gray-700 leading-relaxed">
+                      <div className={`h-px mb-4 ${
+                        isDark 
+                        ? "bg-gradient-to-r from-transparent via-slate-600 to-transparent" 
+                        : "bg-gradient-to-r from-transparent via-[#37c4ef] to-transparent"
+                      }`}></div>
+                      <p className={`leading-relaxed transition-colors ${
+                        isDark ? "text-slate-300" : "text-gray-700"
+                      }`}>
                         {faq.a}
                       </p>
                     </div>
@@ -121,8 +147,10 @@ const SectionFAQ = () => {
           viewport={{ once: true }}
           className="mt-12 text-center"
         >
-          <p className="text-gray-600 mb-4">Still have questions?</p>
-          <button className="px-8 py-3 bg-[#37c4ef] text-white font-semibold rounded-full hover:bg-[#2ab3dc] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+          <p className={`mb-4 transition-colors ${isDark ? "text-slate-400" : "text-gray-600"}`}>
+            Still have questions?
+          </p>
+          <button className="px-8 py-3 bg-[#37c4ef] text-white font-semibold rounded-full hover:bg-[#2ab3dc] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95">
             Contact Support
           </button>
         </motion.div>

@@ -1,9 +1,31 @@
-@import "tailwindcss";
-@plugin "daisyui";
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap");
 
+@import "tailwindcss";
+
+/* DaisyUI plugin with both themes */
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+}
+
+/* Custom light theme */
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: blue;
+  --color-secondary: teal;
+}
+
+/* Dark variant custom selector */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+/* Shimmer animation */
 @keyframes shimmer {
-  0% { background-position: -500px 0; }
-  100% { background-position: 500px 0; }
+  0% {
+    background-position: -500px 0;
+  }
+  100% {
+    background-position: 500px 0;
+  }
 }
 
 .animate-shimmer {
@@ -20,7 +42,38 @@
   animation: shimmer 2s infinite linear;
 }
 
-
+/* Marquee pause on hover */
 .hover\:pause-marquee:hover {
   animation-play-state: paused;
+}
+
+/* ============= FONT CONFIGURATION ============= */
+
+/* Default font for everything */
+* {
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+/* All headings use Playfair Display */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+}
+
+/* Manual control classes */
+.font-heading {
+  font-family: "Playfair Display", serif !important;
+}
+
+.font-body {
+  font-family: "Inter", sans-serif !important;
 }

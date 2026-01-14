@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Star, Award } from 'lucide-react';
+import useTheme from "../../Shared/useTheme"; // Theme context path check kore nio
 
 const SuccessStories = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
 
   const testimonials = [
     {
@@ -79,7 +82,6 @@ const SuccessStories = () => {
     }
   ];
 
-  // Group testimonials into sets of 3
   const groupedTestimonials = [];
   for (let i = 0; i < testimonials.length; i += 3) {
     groupedTestimonials.push(testimonials.slice(i, i + 3));
@@ -94,33 +96,41 @@ const SuccessStories = () => {
   };
 
   return (
-    <section className="relative bg-gradient-to-br from-cyan-50 via-sky-50 to-blue-100 py-24 px-4 overflow-hidden">
+    <section className={`relative py-24 px-4 overflow-hidden transition-colors duration-700 ${
+      isDark ? "bg-gradient-to-br from-[#020d14] via-[#031f2b] to-[#020d14]" : "bg-gradient-to-br from-cyan-50 via-sky-50 to-blue-100"
+    }`}>
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-[0.15]">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-300 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-sky-300 rounded-full blur-3xl"></div>
+        <div className={`absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl ${isDark ? "bg-cyan-300/20" : "bg-cyan-300"}`}></div>
+        <div className={`absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl ${isDark ? "bg-sky-300/20" : "bg-sky-300"}`}></div>
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-cyan-400 text-white px-5 py-2.5 rounded-full text-sm font-bold mb-6 shadow-lg">
+          <div className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold mb-6 shadow-lg ${
+            isDark ? "bg-[#37c4ef]/20 text-[#37c4ef] border border-[#37c4ef]/50" : "bg-cyan-400 text-white"
+          }`}>
             <Award className="w-5 h-5" />
             Real Scholarship Winners
           </div>
-          <h2 className="text-5xl md:text-6xl font-extrabold text-slate-900 mb-5 leading-tight">
-            Success Stories
+          <h2 className={`text-5xl font-extrabold mb-5 leading-tight ${isDark ? "text-white" : "text-slate-900"}`}>
+            Success <span className={isDark ? "text-gray-400" : "text-gray-600"}>Stories</span>
           </h2>
-          <p className="text-xl text-slate-700 font-medium max-w-2xl mx-auto">
-            Scholarships.com has helped over <span className="text-cyan-600 font-bold">26 million students</span> and families find college scholarships. Will you be our next winner?
+          <p className={`text-xl font-medium max-w-2xl mx-auto ${isDark ? "text-gray-300" : "text-slate-700"}`}>
+            Scholarships.com has helped over <span className={isDark ? "text-[#37c4ef]" : "text-cyan-600 font-bold"}>26 million students</span> and families find college scholarships. Will you be our next winner?
           </p>
           
           {/* CTA Buttons */}
           <div className="flex flex-wrap gap-4 justify-center mt-10">
-            <button className="px-10 py-4 bg-cyan-500 hover:bg-cyan-600 text-white font-bold rounded-xl transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 text-lg">
+            <button className={`px-10 py-4 font-bold rounded-xl transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 text-lg ${
+              isDark ? "bg-[#37c4ef] hover:bg-[#1faed1] text-white" : "bg-cyan-500 hover:bg-cyan-600 text-white"
+            }`}>
               See More Winners
             </button>
-            <button className="px-10 py-4 bg-white hover:bg-cyan-50 text-cyan-600 font-bold rounded-xl border-3 border-cyan-500 transition-all duration-300 shadow-lg hover:shadow-xl text-lg">
+            <button className={`px-10 py-4 font-bold rounded-xl border-3 transition-all duration-300 shadow-lg hover:shadow-xl text-lg ${
+              isDark ? "bg-transparent border-[#37c4ef] text-white hover:bg-[#37c4ef]/10" : "bg-white hover:bg-cyan-50 text-cyan-600 border-cyan-500"
+            }`}>
               Winner Interviews
             </button>
           </div>
@@ -137,7 +147,9 @@ const SuccessStories = () => {
                 <div key={groupIndex} className="w-full flex-shrink-0 px-4">
                   <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto">
                     {group.map((testimonial) => (
-                      <div key={testimonial.id} className="bg-white rounded-2xl shadow-2xl p-7 border-2 border-cyan-100 hover:shadow-3xl hover:border-cyan-300 transition-all duration-300 transform hover:-translate-y-2">
+                      <div key={testimonial.id} className={`rounded-2xl shadow-2xl p-7 border-2 transition-all duration-300 transform hover:-translate-y-2 ${
+                        isDark ? "bg-[#041e2b]/95 border-[#37c4ef]/20" : "bg-white border-cyan-100 hover:border-cyan-300"
+                      }`}>
                         {/* Stars */}
                         <div className="flex gap-1 mb-5">
                           {[...Array(testimonial.rating)].map((_, i) => (
@@ -146,25 +158,25 @@ const SuccessStories = () => {
                         </div>
 
                         {/* Quote */}
-                        <blockquote className="text-slate-700 text-base leading-relaxed mb-6 italic min-h-[120px] font-medium">
+                        <blockquote className={`text-base leading-relaxed mb-6 italic min-h-[120px] font-medium ${isDark ? "text-gray-300" : "text-slate-700"}`}>
                           "{testimonial.quote}"
                         </blockquote>
 
                         {/* Profile */}
-                        <div className="flex items-center gap-4 pt-5 border-t-2 border-cyan-100">
+                        <div className={`flex items-center gap-4 pt-5 border-t-2 ${isDark ? "border-[#37c4ef]/20" : "border-cyan-100"}`}>
                           <img 
                             src={testimonial.image}
                             alt={testimonial.name}
-                            className="w-16 h-16 rounded-full object-cover ring-4 ring-cyan-200 shadow-lg"
+                            className={`w-16 h-16 rounded-full object-cover ring-4 shadow-lg ${isDark ? "ring-[#37c4ef]/30" : "ring-cyan-200"}`}
                           />
                           <div>
-                            <h3 className="font-bold text-slate-900 text-lg">
+                            <h3 className={`font-bold text-lg ${isDark ? "text-white" : "text-slate-900"}`}>
                               {testimonial.name}
                             </h3>
-                            <p className="text-sm text-cyan-600 font-bold">
+                            <p className={`text-sm font-bold ${isDark ? "text-[#37c4ef]/80" : "text-cyan-600"}`}>
                               {testimonial.scholarship}
                             </p>
-                            <p className="text-base font-extrabold text-slate-800">
+                            <p className={`text-base font-extrabold ${isDark ? "text-[#37c4ef]" : "text-slate-800"}`}>
                               {testimonial.amount}
                             </p>
                           </div>
@@ -180,14 +192,18 @@ const SuccessStories = () => {
           {/* Navigation Arrows */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 w-14 h-14 bg-cyan-500 hover:bg-cyan-600 text-white rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 z-10"
+            className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 z-10 ${
+              isDark ? "bg-[#37c4ef]/30 hover:bg-[#37c4ef]/50 text-white" : "bg-cyan-500 hover:bg-cyan-600 text-white"
+            }`}
             aria-label="Previous testimonials"
           >
             <ChevronLeft className="w-7 h-7" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 w-14 h-14 bg-cyan-500 hover:bg-cyan-600 text-white rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 z-10"
+            className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 z-10 ${
+              isDark ? "bg-[#37c4ef]/30 hover:bg-[#37c4ef]/50 text-white" : "bg-cyan-500 hover:bg-cyan-600 text-white"
+            }`}
             aria-label="Next testimonials"
           >
             <ChevronRight className="w-7 h-7" />
@@ -201,8 +217,8 @@ const SuccessStories = () => {
                 onClick={() => setCurrentSlide(index)}
                 className={`h-3 rounded-full transition-all duration-300 ${
                   currentSlide === index 
-                    ? 'w-10 bg-cyan-500 shadow-lg' 
-                    : 'w-3 bg-slate-400 hover:bg-cyan-400'
+                    ? `w-10 shadow-lg ${isDark ? "bg-[#37c4ef]" : "bg-cyan-500"}` 
+                    : `w-3 ${isDark ? "bg-slate-700 hover:bg-[#37c4ef]/50" : "bg-slate-400 hover:bg-cyan-400"}`
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
               />

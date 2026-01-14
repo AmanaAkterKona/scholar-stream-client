@@ -1,36 +1,64 @@
 .marquee-container {
   overflow: hidden;
-  position: relative;
   width: 100%;
+  padding: 2.5rem 0;
   background: white;
-  padding: 2rem 0;
+  transition: all 0.7s ease;
 }
 
-.marquee {
+.dark-bg {
+  background: black !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.marquee-wrapper {
   display: flex;
-  gap: 4rem;
-  animation: marquee 20s linear infinite;
+  width: 100%;
+}
+
+.marquee-content {
+  display: flex;
+  flex-shrink: 0;
+  gap: 5rem; /* লোগোগুলোর মধ্যে গ্যাপ */
+  padding-right: 5rem; /* সেট দুটির মাঝখানেও একই গ্যাপ বজায় রাখতে */
+  min-width: 100%;
+  animation: scroll 30s linear infinite;
 }
 
 .marquee-logo {
-  height: 60px; 
+  height: 60px; /* লোগো বড় করা হয়েছে */
+  width: auto;
   object-fit: contain;
-  filter: grayscale(70%);
-  opacity: 0.7;
-  transition: filter 0.3s, opacity 0.3s, transform 0.3s;
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: all 0.4s ease;
+}
+
+/* ডার্ক মোড লজিক */
+.dark-bg .marquee-logo {
+  filter: grayscale(100%) invert(1) brightness(2);
+  mix-blend-mode: screen;
+  opacity: 0.8;
 }
 
 .marquee-logo:hover {
-  filter: grayscale(0%);
-  opacity: 1;
-  transform: scale(1.1); 
+  filter: grayscale(0%) invert(0) brightness(1) !important;
+  opacity: 1 !important;
+  transform: scale(1.1);
+  mix-blend-mode: normal !important;
 }
 
-.marquee:hover {
-  animation-play-state: paused; 
+/* হোভার করলে অ্যানিমেশন থেমে যাবে */
+.marquee-wrapper:hover .marquee-content {
+  animation-play-state: paused;
 }
 
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); } /* duplicated logos পুরো scroll হবে */
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%); /* অর্ধেক দূরত্ব গেলেই লুপটি আবার শুরু হবে */
+  }
 }

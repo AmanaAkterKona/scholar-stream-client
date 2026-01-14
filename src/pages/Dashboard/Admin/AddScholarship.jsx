@@ -5,15 +5,16 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
+
 import {
   FaUniversity,
   FaGlobeAmericas,
   FaGraduationCap,
-  FaFileInvoiceDollar,
   FaPlusCircle,
   FaSpinner,
   FaArrowRight,
 } from "react-icons/fa";
+import useTheme from "../../Home/Shared/useTheme";
 
 const AddScholarship = () => {
   const {
@@ -26,6 +27,10 @@ const AddScholarship = () => {
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  
+  // Theme Logic
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -55,6 +60,8 @@ const AddScholarship = () => {
           title: "Success!",
           text: "Scholarship added successfully",
           confirmButtonColor: "#008080",
+          background: isDark ? "#1e293b" : "#fff",
+          color: isDark ? "#fff" : "#000",
         });
         reset();
       }
@@ -64,26 +71,40 @@ const AddScholarship = () => {
         title: "Error!",
         text: "Failed to add scholarship",
         confirmButtonColor: "#EF4444",
+        background: isDark ? "#1e293b" : "#fff",
+        color: isDark ? "#fff" : "#000",
       });
     } finally {
       setLoading(false);
     }
   };
 
-  const inputStyle =
-    "w-full px-4 py-3 bg-white border border-[#e2e8f0] rounded-xl text-[#1a2e35] font-semibold placeholder:text-[#94a3b8] focus:border-[#008080] focus:ring-2 focus:ring-[#008080]/10 outline-none transition-all duration-200";
-  const labelStyle =
-    "block text-sm font-black text-[#1a2e35] mb-2 ml-1 uppercase tracking-wide";
+  // Dynamic Styles based on Theme
+  const inputStyle = `w-full px-4 py-3 border rounded-xl font-semibold outline-none transition-all duration-200 ${
+    isDark 
+      ? "bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 focus:border-indigo-500 focus:ring-indigo-500/10" 
+      : "bg-white border-[#e2e8f0] text-[#1a2e35] placeholder:text-[#94a3b8] focus:border-[#008080] focus:ring-[#008080]/10"
+  }`;
+
+  const labelStyle = `block text-sm font-black mb-2 ml-1 uppercase tracking-wide ${
+    isDark ? "text-slate-300" : "text-[#1a2e35]"
+  }`;
 
   return (
-    <div className="min-h-screen bg-[#f0f9ff] p-6 md:p-12 font-sans">
+    <div className={`min-h-screen transition-colors duration-300 p-6 md:p-12 font-sans ${
+      isDark ? "bg-[#020b17]" : "bg-[#f0f9ff]"
+    }`}>
       <div className="max-w-5xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4 border-l-4 border-[#008080] pl-6">
+        <div className={`flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4 border-l-4 pl-6 ${
+          isDark ? "border-indigo-500" : "border-[#008080]"
+        }`}>
           <div>
-            <h1 className="text-3xl md:text-4xl font-black text-[#1a2e35] tracking-tight">
-              Add New <span className="text-[#00a3c4]">Scholarship</span>
+            <h1 className={`text-3xl md:text-4xl font-black tracking-tight ${
+              isDark ? "text-white" : "text-[#1a2e35]"
+            }`}>
+              Add New <span className={isDark ? "text-indigo-400" : "text-[#00a3c4]"}>Scholarship</span>
             </h1>
-            <p className="text-[#64748b] font-medium mt-1 italic">
+            <p className={`${isDark ? "text-slate-400" : "text-[#64748b]"} font-medium mt-1 italic`}>
               Publish global opportunities for the next generation.
             </p>
           </div>
@@ -91,14 +112,20 @@ const AddScholarship = () => {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="bg-white rounded-[40px] shadow-2xl shadow-cyan-900/5 p-8 md:p-12 border border-white"
+          className={`rounded-[40px] shadow-2xl p-8 md:p-12 border transition-all duration-300 ${
+            isDark 
+              ? "bg-slate-900 border-slate-800 shadow-black/20" 
+              : "bg-white border-white shadow-cyan-900/5"
+          }`}
         >
           <div className="space-y-12">
             {/* Institution Section */}
             <section>
-              <div className="flex items-center gap-3 mb-8 border-b border-slate-100 pb-4">
-                <FaUniversity className="text-[#008080] text-xl" />
-                <h2 className="text-xl font-black text-[#1a2e35]">
+              <div className={`flex items-center gap-3 mb-8 border-b pb-4 ${
+                isDark ? "border-slate-800" : "border-slate-100"
+              }`}>
+                <FaUniversity className={isDark ? "text-indigo-400" : "text-[#008080] text-xl"} />
+                <h2 className={`text-xl font-black ${isDark ? "text-slate-100" : "text-[#1a2e35]"}`}>
                   University Profile
                 </h2>
               </div>
@@ -134,10 +161,12 @@ const AddScholarship = () => {
             </section>
 
             {/* Global Standings Section */}
-            <section className="bg-[#f0f9ff]/40 p-6 md:p-8 rounded-[30px] border border-[#e0f2fe]">
+            <section className={`p-6 md:p-8 rounded-[30px] border transition-colors ${
+              isDark ? "bg-slate-800/40 border-slate-700" : "bg-[#f0f9ff]/40 border-[#e0f2fe]"
+            }`}>
               <div className="flex items-center gap-3 mb-8">
-                <FaGlobeAmericas className="text-[#008080] text-xl" />
-                <h2 className="text-xl font-black text-[#1a2e35]">
+                <FaGlobeAmericas className={isDark ? "text-indigo-400" : "text-[#008080] text-xl"} />
+                <h2 className={`text-xl font-black ${isDark ? "text-slate-100" : "text-[#1a2e35]"}`}>
                   Global Standings
                 </h2>
               </div>
@@ -174,9 +203,11 @@ const AddScholarship = () => {
 
             {/* Academic & Finance Section */}
             <section>
-              <div className="flex items-center gap-3 mb-8 border-b border-slate-100 pb-4">
-                <FaGraduationCap className="text-[#008080] text-2xl" />
-                <h2 className="text-xl font-black text-[#1a2e35]">
+              <div className={`flex items-center gap-3 mb-8 border-b pb-4 ${
+                isDark ? "border-slate-800" : "border-slate-100"
+              }`}>
+                <FaGraduationCap className={isDark ? "text-indigo-400" : "text-[#008080] text-2xl"} />
+                <h2 className={`text-xl font-black ${isDark ? "text-slate-100" : "text-[#1a2e35]"}`}>
                   Academic & Financials
                 </h2>
               </div>
@@ -187,10 +218,10 @@ const AddScholarship = () => {
                     {...register("subjectCategory", { required: true })}
                     className={inputStyle}
                   >
-                    <option value="">Select Category</option>
-                    <option value="Engineering">Engineering</option>
-                    <option value="Computer Science">Computer Science</option>
-                    <option value="Business">Business</option>
+                    <option value="" className={isDark ? "bg-slate-900" : ""}>Select Category</option>
+                    <option value="Engineering" className={isDark ? "bg-slate-900" : ""}>Engineering</option>
+                    <option value="Computer Science" className={isDark ? "bg-slate-900" : ""}>Computer Science</option>
+                    <option value="Business" className={isDark ? "bg-slate-900" : ""}>Business</option>
                   </select>
                 </div>
                 <div>
@@ -199,9 +230,9 @@ const AddScholarship = () => {
                     {...register("scholarshipCategory", { required: true })}
                     className={inputStyle}
                   >
-                    <option value="">Select Type</option>
-                    <option value="Full fund">Full fund</option>
-                    <option value="Partial">Partial</option>
+                    <option value="" className={isDark ? "bg-slate-900" : ""}>Select Type</option>
+                    <option value="Full fund" className={isDark ? "bg-slate-900" : ""}>Full fund</option>
+                    <option value="Partial" className={isDark ? "bg-slate-900" : ""}>Partial</option>
                   </select>
                 </div>
                 <div>
@@ -210,9 +241,9 @@ const AddScholarship = () => {
                     {...register("degree", { required: true })}
                     className={inputStyle}
                   >
-                    <option value="">Select Degree</option>
-                    <option value="Bachelor">Bachelor</option>
-                    <option value="Masters">Masters</option>
+                    <option value="" className={isDark ? "bg-slate-900" : ""}>Select Degree</option>
+                    <option value="Bachelor" className={isDark ? "bg-slate-900" : ""}>Bachelor</option>
+                    <option value="Masters" className={isDark ? "bg-slate-900" : ""}>Masters</option>
                   </select>
                 </div>
                 <div>
@@ -257,18 +288,26 @@ const AddScholarship = () => {
             </section>
           </div>
 
-          <div className="mt-12 flex flex-col md:flex-row justify-end items-center gap-6 pt-10 border-t border-slate-100">
+          <div className={`mt-12 flex flex-col md:flex-row justify-end items-center gap-6 pt-10 border-t ${
+            isDark ? "border-slate-800" : "border-slate-100"
+          }`}>
             <button
               type="button"
               onClick={() => reset()}
-              className="text-[#64748b] font-bold uppercase tracking-widest text-xs hover:text-[#1a2e35] transition-colors"
+              className={`font-bold uppercase tracking-widest text-xs transition-colors ${
+                isDark ? "text-slate-500 hover:text-white" : "text-[#64748b] hover:text-[#1a2e35]"
+              }`}
             >
               Reset Form
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="w-full md:w-auto px-12 py-4 bg-[#008080] hover:bg-[#006666] text-white font-black rounded-2xl shadow-lg flex items-center justify-center gap-3 transition-all active:scale-95 disabled:opacity-50"
+              className={`w-full md:w-auto px-12 py-4 font-black rounded-2xl shadow-lg flex items-center justify-center gap-3 transition-all active:scale-95 disabled:opacity-50 ${
+                isDark 
+                  ? "bg-indigo-600 hover:bg-indigo-700 text-white" 
+                  : "bg-[#008080] hover:bg-[#006666] text-white"
+              }`}
             >
               {loading ? (
                 <FaSpinner className="animate-spin text-xl" />

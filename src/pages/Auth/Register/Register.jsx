@@ -6,6 +6,7 @@ import scholarImg2 from "../../../assets/images (1).jpg";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import register1 from "../../../assets/logimg.jpg"
 
 const Register = () => {
   const {
@@ -137,148 +138,173 @@ const Register = () => {
 };
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
-      {/* Left Side - Premium Form */}
-      <div className="flex w-full md:w-1/2 justify-center items-center p-8 relative overflow-hidden">
-        {/* Background Design */}
-        <div className="absolute inset-0 opacity-5">
-          <div
-            className="absolute top-0 left-0 w-full h-full"
-            style={{
-              backgroundImage: `radial-gradient(circle at 2px 2px, #4f46e5 1px, transparent 0)`,
-              backgroundSize: "40px 40px",
-            }}
-          ></div>
+    <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-br from-[#033044] via-[#044a66] to-[#055a7a] relative overflow-hidden">
+      
+      {/* Animated Background Elements */}
+      <div className="absolute w-[500px] h-[500px] bg-[#37c4ef]/20 blur-[120px] rounded-full top-[-100px] left-[-100px] animate-pulse"></div>
+      <div className="absolute w-[400px] h-[400px] bg-[#37c4ef]/15 blur-[100px] rounded-full bottom-[-80px] right-[-80px] animate-[pulse_4s_ease-in-out_infinite]"></div>
+      <div className="absolute w-[300px] h-[300px] bg-white/5 blur-[80px] rounded-full top-1/2 left-1/2 animate-[pulse_5s_ease-in-out_infinite]"></div>
+
+      {/* Left Side - Image with Glossy Overlay */}
+      <div className="flex w-full md:w-1/2 relative overflow-hidden">
+        {/* Background Image - register1 */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${register1})` }}
+        />
+        
+        {/* Glossy Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#033044]/90 via-[#033044]/70 to-transparent backdrop-blur-[2px]"></div>
+        
+        {/* Glass Effect Layer */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-white/5 via-transparent to-white/10"></div>
+
+        {/* Content Over Image */}
+        <div className="relative z-10 flex flex-col justify-center items-center w-full h-full p-12 text-white">
+          {/* Logo/Brand Section */}
+          <div className="mb-8 backdrop-blur-xl bg-white/10 p-6 rounded-3xl border border-white/20 shadow-2xl">
+            <h1 className="text-5xl md:text-6xl font-bold drop-shadow-[0_0_30px_rgba(55,196,239,0.8)]">
+              Scholar<span className="text-[#37c4ef]">Stream</span>
+            </h1>
+          </div>
+
+          {/* Feature Cards */}
+          <div className="space-y-4 w-full max-w-md">
+            <div className="backdrop-blur-xl bg-white/10 p-5 rounded-2xl border border-white/20 shadow-lg hover:bg-white/15 transition-all">
+              <h3 className="text-xl font-bold text-[#37c4ef] mb-2">🚀 Quick Start</h3>
+              <p className="text-sm text-white/80">Create your account in under 2 minutes</p>
+            </div>
+            
+            <div className="backdrop-blur-xl bg-white/10 p-5 rounded-2xl border border-white/20 shadow-lg hover:bg-white/15 transition-all">
+              <h3 className="text-xl font-bold text-[#37c4ef] mb-2">🎯 Personalized Matches</h3>
+              <p className="text-sm text-white/80">Get scholarships tailored to your profile</p>
+            </div>
+
+            <div className="backdrop-blur-xl bg-white/10 p-5 rounded-2xl border border-white/20 shadow-lg hover:bg-white/15 transition-all">
+              <h3 className="text-xl font-bold text-[#37c4ef] mb-2">🔒 Secure & Private</h3>
+              <p className="text-sm text-white/80">Your data is protected with encryption</p>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <div className="absolute w-96 h-96 bg-gradient-to-br from-indigo-300 to-blue-300 opacity-15 blur-3xl rounded-full -top-20 -left-20 animate-pulse"></div>
-        <div className="absolute w-80 h-80 bg-gradient-to-br from-blue-200 to-slate-200 opacity-10 blur-3xl rounded-full -bottom-16 -right-16 animate-[pulse_3s_ease-in-out_infinite]"></div>
-
+      {/* Right Side - Register Form */}
+      <div className="flex w-full md:w-1/2 justify-center items-center p-8 relative overflow-hidden">
+        
+        {/* Background Image behind form - halka */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-20"
+          style={{ backgroundImage: `url(${scholarImg2})` }}
+        />
+        <div className="absolute inset-0 bg-[#033044]/50 backdrop-blur-[1px]"></div>
+        
         <form
           onSubmit={handleSubmit(handleRegistration)}
-          className="w-full max-w-md bg-white/95 backdrop-blur-md p-10 rounded-2xl shadow-2xl border border-slate-200 relative z-10"
+          className="w-full max-w-md backdrop-blur-2xl bg-white/10 p-10 rounded-3xl shadow-2xl border border-white/20 relative z-10 max-h-[90vh] overflow-y-auto"
         >
-          <h2 className="text-4xl font-extrabold text-slate-800 mb-6 text-center">
-            Welcome to Scholar Stream
-          </h2>
-          <p className="text-center text-slate-600 mb-8">Create your account</p>
+          {/* Form Header */}
+          <div className="text-center mb-6">
+            <h2 className="text-4xl font-bold text-white mb-2 drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]">Join Us Today</h2>
+            <p className="text-white/90 font-medium">Create your account and start your journey</p>
+          </div>
 
           {/* Name */}
-          <label className="block mb-2 font-semibold text-slate-700">Name</label>
-          <input
-            type="text"
-            {...register("name", { required: true })}
-            className="w-full p-3 border rounded-lg text-gray-700 placeholder-slate-400 border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 mb-4 transition-all"
-            placeholder="Your Name"
-          />
-          {errors.name && (
-            <p className="text-red-500 -mt-3 mb-3 text-sm">Name is required</p>
-          )}
+          <div className="mb-4">
+            <label className="block mb-2 font-bold text-white text-sm uppercase tracking-wider">Name</label>
+            <input
+              type="text"
+              {...register("name", { required: true })}
+              className="w-full p-4 backdrop-blur-xl bg-white/25 border-2 border-white/40 rounded-xl text-white placeholder-white/60 focus:ring-2 focus:ring-[#37c4ef] focus:border-[#37c4ef] focus:bg-white/30 transition-all shadow-lg font-medium"
+              placeholder="Your Name"
+            />
+            {errors.name && (
+              <p className="text-[#37c4ef] mt-2 text-sm font-bold drop-shadow-lg">⚠ Name is required</p>
+            )}
+          </div>
 
           {/* Photo */}
-          <label className="block mb-2 font-semibold text-slate-700">Photo</label>
-          <input
-            type="file"
-            accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
-            {...register("photo", { required: true })}
-            className="w-full p-2 border rounded-lg border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 mb-4 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 transition-all"
-          />
-          {errors.photo && (
-            <p className="text-red-500 -mt-3 mb-3 text-sm">Photo is required</p>
-          )}
+          <div className="mb-4">
+            <label className="block mb-2 font-semibold text-white/90 text-sm uppercase tracking-wider">Photo</label>
+            <input
+              type="file"
+              accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
+              {...register("photo", { required: true })}
+              className="w-full p-3 backdrop-blur-xl bg-white/20 border border-white/30 rounded-xl text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#37c4ef] file:text-white hover:file:bg-[#1faed1] file:font-semibold transition-all shadow-lg"
+            />
+            {errors.photo && (
+              <p className="text-[#37c4ef] mt-2 text-sm font-medium">⚠ Photo is required</p>
+            )}
+          </div>
 
           {/* Email */}
-          <label className="block mb-2 font-semibold text-slate-700">Email</label>
-          <input
-            type="email"
-            {...register("email", { required: true })}
-            className="w-full p-3 border rounded-lg text-gray-700 placeholder-slate-400 border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 mb-4 transition-all"
-            placeholder="Email"
-          />
-          {errors.email && (
-            <p className="text-red-500 -mt-3 mb-3 text-sm">Email is required</p>
-          )}
+          <div className="mb-4">
+            <label className="block mb-2 font-bold text-white text-sm uppercase tracking-wider">Email</label>
+            <input
+              type="email"
+              {...register("email", { required: true })}
+              className="w-full p-4 backdrop-blur-xl bg-white/25 border-2 border-white/40 rounded-xl text-white placeholder-white/60 focus:ring-2 focus:ring-[#37c4ef] focus:border-[#37c4ef] focus:bg-white/30 transition-all shadow-lg font-medium"
+              placeholder="your.email@example.com"
+            />
+            {errors.email && (
+              <p className="text-[#37c4ef] mt-2 text-sm font-bold drop-shadow-lg">⚠ Email is required</p>
+            )}
+          </div>
 
           {/* Password */}
-          <label className="block mb-2 font-semibold text-slate-700">Password</label>
-          <input
-            type="password"
-            {...register("password", {
-              required: true,
-              minLength: 6,
-              pattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
-            })}
-            className="w-full p-3 border rounded-lg text-gray-700 placeholder-slate-400 border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 mb-2 transition-all"
-            placeholder="Password"
-          />
-          {errors.password?.type === "required" && (
-            <p className="text-red-500 mb-3 text-sm">Password is required</p>
-          )}
-          {errors.password?.type === "minLength" && (
-            <p className="text-red-500 mb-3 text-sm">Password must be 6 characters or longer</p>
-          )}
-          {errors.password?.type === "pattern" && (
-            <p className="text-red-500 mb-3 text-sm">
-              Must include uppercase, lowercase, number & special character
-            </p>
-          )}
+          <div className="mb-4">
+            <label className="block mb-2 font-bold text-white text-sm uppercase tracking-wider">Password</label>
+            <input
+              type="password"
+              {...register("password", {
+                required: true,
+                minLength: 6,
+                pattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+              })}
+              className="w-full p-4 backdrop-blur-xl bg-white/25 border-2 border-white/40 rounded-xl text-white placeholder-white/60 focus:ring-2 focus:ring-[#37c4ef] focus:border-[#37c4ef] focus:bg-white/30 transition-all shadow-lg font-medium"
+              placeholder="Create a strong password"
+            />
+            {errors.password?.type === "required" && (
+              <p className="text-[#37c4ef] mt-2 text-sm font-bold drop-shadow-lg">⚠ Password is required</p>
+            )}
+            {errors.password?.type === "minLength" && (
+              <p className="text-[#37c4ef] mt-2 text-sm font-bold drop-shadow-lg">⚠ Password must be 6 characters or longer</p>
+            )}
+            {errors.password?.type === "pattern" && (
+              <p className="text-[#37c4ef] mt-2 text-sm font-bold drop-shadow-lg">
+                ⚠ Must include uppercase, lowercase, number & special character
+              </p>
+            )}
+          </div>
 
-          <button className="w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-bold py-3 rounded-lg mt-4 shadow-lg transition-all duration-300 transform hover:scale-[1.02]">
-            Register
+          {/* Register Button */}
+          <button className="w-full bg-gradient-to-r from-[#37c4ef] to-[#1faed1] hover:from-[#1faed1] hover:to-[#37c4ef] text-[#033044] font-black text-lg py-4 rounded-xl shadow-xl shadow-[#37c4ef]/50 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-[#37c4ef]/70 border-2 border-white/20">
+            CREATE ACCOUNT
           </button>
 
-          <p className="mt-6 text-center text-slate-600">
+          {/* Login Link */}
+          <p className="mt-6 text-center text-white font-medium">
             Already have an account?
             <Link
-              className="text-indigo-600 font-semibold hover:text-indigo-700 underline ml-1 transition-colors"
+              className="text-[#37c4ef] font-bold hover:text-white ml-2 transition-colors drop-shadow-lg"
               to="/login"
               state={location.state}
             >
-              Login
+              Sign In →
             </Link>
           </p>
 
+          {/* Divider */}
+          <div className="flex items-center my-6">
+            <div className="flex-1 h-px bg-white/20"></div>
+            <span className="px-4 text-white/60 text-sm">OR</span>
+            <div className="flex-1 h-px bg-white/20"></div>
+          </div>
+
+          {/* Social Login */}
           <div className="mt-6">
             <SocialLogin />
           </div>
         </form>
-      </div>
-
-      {/* Right Side */}
-      <div className="flex w-full md:w-1/2 justify-center items-center p-6 md:p-10 relative bg-gradient-to-br from-indigo-50 via-blue-50 to-slate-50 overflow-hidden">
-        <div className="absolute w-96 h-96 bg-gradient-to-br from-indigo-300 to-blue-300 opacity-20 blur-3xl rounded-full top-0 right-0 animate-pulse"></div>
-
-        <div className="relative z-10 flex flex-col items-center justify-center w-full h-full space-y-8">
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 rounded-full blur-2xl opacity-20 animate-pulse"></div>
-            <div className="relative bg-white rounded-full p-6 shadow-2xl">
-              <svg className="w-16 h-16 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-              </svg>
-            </div>
-          </div>
-
-          <div className="text-center space-y-4 max-w-lg px-6">
-            <h3 className="text-slate-800 font-bold text-4xl md:text-5xl tracking-tight">
-              Welcome to
-              <span className="block mt-2 bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent">
-                ScholarStream
-              </span>
-            </h3>
-            <p className="text-slate-600 text-lg font-medium">
-              Empowering students to achieve academic excellence
-            </p>
-          </div>
-
-          <div className="relative w-full max-w-md px-6">
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-indigo-600 via-blue-600 to-indigo-600 rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition duration-500"></div>
-              <div className="relative bg-white rounded-2xl p-2 shadow-2xl">
-                <img src={scholarImg2} alt="Scholarship" className="w-full h-auto object-cover rounded-xl" />
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

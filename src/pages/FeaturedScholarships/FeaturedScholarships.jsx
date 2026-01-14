@@ -139,7 +139,7 @@ const FeaturedScholarships = () => {
         ))}
       </Swiper>
 
-      {/* Custom Navigation Buttons (ছবির মতো সাইডে তীর চিহ্ন) */}
+     
       <button className="prev-btn absolute left-[-20px] top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white shadow-xl rounded-full flex items-center justify-center text-slate-800 hover:bg-[#008080] hover:text-white transition-all hidden lg:flex">
         <FaArrowLeft />
       </button>

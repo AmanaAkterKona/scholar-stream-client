@@ -34,7 +34,6 @@ import AllReviews from "../pages/Dashboard/Moderator/AllReviews";
 import MyApplications from "../pages/Dashboard/Student/MyApplications";
 import MyReviews from "../pages/Dashboard/Student/MyReviews";
 
-
 // Error Page
 import Error404 from "../pages/Error404/Error404";
 
@@ -43,6 +42,10 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import ModeratorRoute from "./ModeratorRoute";
 import StudentRoute from "./StudentRoute";
+import ContactUs from "../pages/Home/Home/ContactUs";
+import ProviderGuidelines from "../pages/Home/Home/ProviderGuidelines";
+import PrivacyPolicy from "../pages/Home/Home/PrivacyPolicy ";
+import TermsOfService from "../pages/Home/Home/TermsOfService";
 
 export const router = createBrowserRouter([
   // ===============================
@@ -57,6 +60,23 @@ export const router = createBrowserRouter([
 
       { path: "scholarships", element: <AllScholarships /> },
       { path: "scholarships/:id", element: <ScholarshipDetails /> },
+      {
+        path: "/contact",
+        element: <ContactUs />,
+      },
+      {
+        path: "/provider-guidelines",
+        element: <ProviderGuidelines />,
+      },
+
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy />,
+      },     
+      {
+      path: "/terms-of-service",
+      element: <TermsOfService />,
+      },
 
       // ✅ FIXED PAYMENT ROUTE
       {

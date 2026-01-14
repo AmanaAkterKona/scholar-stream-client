@@ -3,10 +3,11 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import useAuth from "../../../hooks/useAuth";
-
+import loginImg2 from "../../../assets/logimg.jpg"
 import loginImg from "../../../assets/images (1).jpg"
+
 const Login = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm();
   const { signInUser } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
@@ -22,91 +23,174 @@ const Login = () => {
       });
   };
 
-  return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+  // Auto-fill demo credentials
+  const handleDemoLogin = (role) => {
+    if (role === 'admin') {
+      setValue('email', 'santi@gmail.com');
+      setValue('password', 'Scholar@123');
+    } else if (role === 'student') {
+      setValue('email', 'Arhan@nazar.com');
+      setValue('password', '123Oo@78');
+    }
+  };
 
-      {/* Left Side - Login Form */}
+  return (
+    <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-br from-[#033044] via-[#044a66] to-[#055a7a] relative overflow-hidden">
+      
+      {/* Animated Background Elements */}
+      <div className="absolute w-[500px] h-[500px] bg-[#37c4ef]/20 blur-[120px] rounded-full top-[-100px] left-[-100px] animate-pulse"></div>
+      <div className="absolute w-[400px] h-[400px] bg-[#37c4ef]/15 blur-[100px] rounded-full bottom-[-80px] right-[-80px] animate-[pulse_4s_ease-in-out_infinite]"></div>
+      <div className="absolute w-[300px] h-[300px] bg-white/5 blur-[80px] rounded-full top-1/2 left-1/2 animate-[pulse_5s_ease-in-out_infinite]"></div>
+
+      {/* Left Side - Image with Glossy Overlay */}
+      <div className="flex w-full md:w-1/2 relative overflow-hidden">
+        {/* Background Image - loginImg2 */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${loginImg2})` }}
+        />
+        
+        {/* Glossy Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#033044]/90 via-[#033044]/70 to-transparent backdrop-blur-[2px]"></div>
+        
+        {/* Glass Effect Layer */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-white/5 via-transparent to-white/10"></div>
+
+        {/* Content Over Image */}
+        <div className="relative z-10 flex flex-col justify-center items-center w-full h-full p-12 text-white">
+          {/* Logo/Brand Section */}
+          <div className="mb-8 backdrop-blur-xl bg-white/10 p-6 rounded-3xl border border-white/20 shadow-2xl">
+            <h1 className="text-5xl md:text-6xl font-bold drop-shadow-[0_0_30px_rgba(55,196,239,0.8)]">
+              Scholar<span className="text-[#37c4ef]">Stream</span>
+            </h1>
+          </div>
+
+          {/* Feature Cards */}
+          <div className="space-y-4 w-full max-w-md">
+            <div className="backdrop-blur-xl bg-white/10 p-5 rounded-2xl border border-white/20 shadow-lg hover:bg-white/15 transition-all">
+              <h3 className="text-xl font-bold text-[#37c4ef] mb-2">🎓 Smart Matching</h3>
+              <p className="text-sm text-white/80">AI-powered scholarship matching based on your profile</p>
+            </div>
+            
+            <div className="backdrop-blur-xl bg-white/10 p-5 rounded-2xl border border-white/20 shadow-lg hover:bg-white/15 transition-all">
+              <h3 className="text-xl font-bold text-[#37c4ef] mb-2">💰 $2.5M+ Available</h3>
+              <p className="text-sm text-white/80">Access thousands of verified scholarship opportunities</p>
+            </div>
+
+            <div className="backdrop-blur-xl bg-white/10 p-5 rounded-2xl border border-white/20 shadow-lg hover:bg-white/15 transition-all">
+              <h3 className="text-xl font-bold text-[#37c4ef] mb-2">✨ 100% Free</h3>
+              <p className="text-sm text-white/80">No hidden fees, completely free for students</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Side - Login Form */}
       <div className="flex w-full md:w-1/2 justify-center items-center p-8 relative overflow-hidden">
         
-        {/* Animated Background */}
-        <div className="absolute w-96 h-96 bg-gradient-to-br from-indigo-300 to-blue-300 opacity-15 blur-3xl rounded-full -top-20 -left-20 animate-pulse"></div>
-        <div className="absolute w-80 h-80 bg-gradient-to-br from-blue-200 to-slate-200 opacity-10 blur-3xl rounded-full -bottom-16 -right-16 animate-[pulse_3s_ease-in-out_infinite]"></div>
-        <div className="absolute top-1/3 left-10 w-16 h-16 border-2 border-blue-300/30 rotate-12"></div>
-
+        {/* Background Image behind form - halka */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-20"
+          style={{ backgroundImage: `url(${loginImg})` }}
+        />
+        <div className="absolute inset-0 bg-[#033044]/50 backdrop-blur-[1px]"></div>
+        
         <form 
           onSubmit={handleSubmit(handleLogin)}
-          className="w-full max-w-md bg-white/95 backdrop-blur-md p-10 rounded-2xl shadow-2xl border border-slate-200 relative z-10"
+          className="w-full max-w-md backdrop-blur-2xl bg-white/10 p-10 rounded-3xl shadow-2xl border border-white/20 relative z-10"
         >
-          <h2 className="text-4xl font-extrabold text-slate-800 mb-2 text-center">Welcome Back</h2>
-          <p className="text-center text-slate-600 mb-6">Please login to your account</p>
+          {/* Form Header */}
+          <div className="text-center mb-8">
+            <h2 className="text-4xl font-bold text-white mb-2 drop-shadow-lg">Welcome Back</h2>
+            <p className="text-white/70">Sign in to continue your scholarship journey</p>
+          </div>
 
-          {/* Email */}
-          <label className="block mb-2 font-semibold text-slate-700">Email</label>
-          <input
-            type="email"
-            {...register("email", { required: true })}
-            className="w-full p-3 border rounded-lg text-gray-700 placeholder-slate-400 border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 mb-4 transition-all"
-            placeholder="Email"
-          />
-          {errors.email && <p className="text-red-500 mb-3 text-sm">Email is required</p>}
+          {/* Email Input */}
+          <div className="mb-5">
+            <label className="block mb-2 font-semibold text-white/90 text-sm uppercase tracking-wider">Email</label>
+            <input
+              type="email"
+              {...register("email", { required: true })}
+              className="w-full p-4 backdrop-blur-xl bg-white/20 border border-white/30 rounded-xl text-white placeholder-white/50 focus:ring-2 focus:ring-[#37c4ef] focus:border-[#37c4ef] transition-all shadow-lg"
+              placeholder="your.email@example.com"
+            />
+            {errors.email && <p className="text-[#37c4ef] mt-2 text-sm font-medium">⚠ Email is required</p>}
+          </div>
 
-          {/* Password */}
-          <label className="block mb-2 font-semibold text-slate-700">Password</label>
-          <input
-            type="password"
-            {...register("password", { required: true, minLength: 6 })}
-            className="w-full p-3 placeholder-slate-600 border rounded-lg text-gray-700 placeholder-slate-400 border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 mb-2 transition-all"
-            placeholder="Password"
-          />
-          {errors.password?.type === "required" && (
-            <p className="text-red-500 mb-3 text-sm">Password is required</p>
-          )}
-          {errors.password?.type === "minLength" && (
-            <p className="text-red-500 mb-3 text-sm">Password must be at least 6 characters</p>
-          )}
+          {/* Password Input */}
+          <div className="mb-3">
+            <label className="block mb-2 font-semibold text-white/90 text-sm uppercase tracking-wider">Password</label>
+            <input
+              type="password"
+              {...register("password", { required: true, minLength: 6 })}
+              className="w-full p-4 backdrop-blur-xl bg-white/20 border border-white/30 rounded-xl text-white placeholder-white/50 focus:ring-2 focus:ring-[#37c4ef] focus:border-[#37c4ef] transition-all shadow-lg"
+              placeholder="Enter your password"
+            />
+            {errors.password?.type === "required" && (
+              <p className="text-[#37c4ef] mt-2 text-sm font-medium">⚠ Password is required</p>
+            )}
+            {errors.password?.type === "minLength" && (
+              <p className="text-[#37c4ef] mt-2 text-sm font-medium">⚠ Password must be at least 6 characters</p>
+            )}
+          </div>
 
-          <div className="mb-4"><a className="link link-hover text-indigo-600">Forgot password?</a></div>
+          {/* Forgot Password */}
+          <div className="mb-6 text-right">
+            <a className="text-[#37c4ef] hover:text-[#37c4ef]/80 text-sm font-semibold cursor-pointer transition-colors">
+              Forgot password?
+            </a>
+          </div>
 
-          <button className="w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-bold py-3 rounded-lg mt-4 shadow-lg transition-all duration-300 transform hover:scale-[1.02]">
-            Login
+          {/* Login Button */}
+          <button className="w-full bg-gradient-to-r from-[#37c4ef] to-[#1faed1] hover:from-[#1faed1] hover:to-[#37c4ef] text-white font-bold py-4 rounded-xl shadow-lg shadow-[#37c4ef]/30 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-[#37c4ef]/50">
+            Sign In
           </button>
 
-          <p className="mt-6 text-center text-slate-600">
+          {/* Demo Login Buttons */}
+          <div className="mt-4 space-y-2">
+            <p className="text-center text-white/60 text-xs uppercase tracking-wider mb-2">Quick Demo Login</p>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() => handleDemoLogin('admin')}
+                className="backdrop-blur-xl bg-white/15 hover:bg-white/25 border border-white/30 text-white font-semibold py-2.5 px-4 rounded-lg transition-all text-sm"
+              >
+                👨‍💼 Admin
+              </button>
+              <button
+                type="button"
+                onClick={() => handleDemoLogin('student')}
+                className="backdrop-blur-xl bg-white/15 hover:bg-white/25 border border-white/30 text-white font-semibold py-2.5 px-4 rounded-lg transition-all text-sm"
+              >
+                🎓 Student
+              </button>
+            </div>
+          </div>
+
+          {/* Register Link */}
+          <p className="mt-6 text-center text-white/80">
             New to ScholarStream?
             <Link
-              className="text-indigo-600 font-semibold hover:text-indigo-700 underline ml-1 transition-colors"
+              className="text-[#37c4ef] font-bold hover:text-[#37c4ef]/80 ml-2 transition-colors"
               to="/register"
               state={location.state}
             >
-              Register
+              Create Account →
             </Link>
           </p>
 
+          {/* Divider */}
+          <div className="flex items-center my-6">
+            <div className="flex-1 h-px bg-white/20"></div>
+            <span className="px-4 text-white/60 text-sm">OR</span>
+            <div className="flex-1 h-px bg-white/20"></div>
+          </div>
+
+          {/* Social Login */}
           <div className="mt-6">
             <SocialLogin />
           </div>
         </form>
-      </div>
-
-      {/* Right Side - Illustration / Info Section */}
-      <div className="flex w-full md:w-1/2 justify-center items-center p-6 md:p-10 relative bg-gradient-to-br from-indigo-50 via-blue-50 to-slate-50 overflow-hidden">
-        <div className="absolute w-96 h-96 bg-gradient-to-br from-indigo-300 to-blue-300 opacity-20 blur-3xl rounded-full top-0 right-0 animate-pulse"></div>
-        <div className="absolute w-80 h-80 bg-gradient-to-br from-blue-200 to-indigo-200 opacity-15 blur-3xl rounded-full bottom-0 left-0 animate-[pulse_3s_ease-in-out_infinite]"></div>
-
-        <div className="relative z-10 flex flex-col items-center justify-center w-full h-full space-y-8">
-          <img 
-            src={loginImg} 
-            alt="Login Illustration" 
-            className="w-full max-w-sm rounded-2xl shadow-2xl object-cover transition-transform duration-500 ease-in-out hover:scale-105"
-          />
-          <h3 className="text-slate-800 font-bold text-3xl md:text-4xl text-center">
-            Welcome Back to
-            <span className="block mt-1 bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent">
-              ScholarStream
-            </span>
-          </h3>
-          <p className="text-slate-600 text-center text-lg md:text-xl">Access your account and manage your scholarships easily</p>
-        </div>
       </div>
     </div>
   );
