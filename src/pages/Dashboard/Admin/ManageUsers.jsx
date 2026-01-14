@@ -68,7 +68,7 @@ const ManageUsers = () => {
       );
     }
     setFilteredUsers(result);
-    setCurrentPage(1); // Reset to first page on search/filter
+    setCurrentPage(1); 
   }, [searchTerm, filterRole, users]);
 
   // Pagination calculation

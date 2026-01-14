@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, HelpCircle } from 'lucide-react';
-import useTheme from "../../Shared/useTheme"; // পাথটি ঠিক আছে কিনা দেখে নিও
+import useTheme from "../../Shared/useTheme"; 
 
 const SectionFAQ = () => {
   const [openIndex, setOpenIndex] = useState(0);

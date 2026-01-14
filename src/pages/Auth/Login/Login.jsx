@@ -42,30 +42,29 @@ const Login = () => {
       <div className="absolute w-[400px] h-[400px] bg-[#37c4ef]/15 blur-[100px] rounded-full bottom-[-80px] right-[-80px] animate-[pulse_4s_ease-in-out_infinite]"></div>
       <div className="absolute w-[300px] h-[300px] bg-white/5 blur-[80px] rounded-full top-1/2 left-1/2 animate-[pulse_5s_ease-in-out_infinite]"></div>
 
-      {/* Left Side - Image with Glossy Overlay */}
+     
       <div className="flex w-full md:w-1/2 relative overflow-hidden">
-        {/* Background Image - loginImg2 */}
+       
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${loginImg2})` }}
         />
         
-        {/* Glossy Overlay */}
+        
         <div className="absolute inset-0 bg-gradient-to-br from-[#033044]/90 via-[#033044]/70 to-transparent backdrop-blur-[2px]"></div>
         
-        {/* Glass Effect Layer */}
+       
         <div className="absolute inset-0 bg-gradient-to-tr from-white/5 via-transparent to-white/10"></div>
 
-        {/* Content Over Image */}
+      
         <div className="relative z-10 flex flex-col justify-center items-center w-full h-full p-12 text-white">
-          {/* Logo/Brand Section */}
+         
           <div className="mb-8 backdrop-blur-xl bg-white/10 p-6 rounded-3xl border border-white/20 shadow-2xl">
             <h1 className="text-5xl md:text-6xl font-bold drop-shadow-[0_0_30px_rgba(55,196,239,0.8)]">
               Scholar<span className="text-[#37c4ef]">Stream</span>
             </h1>
           </div>
 
-          {/* Feature Cards */}
           <div className="space-y-4 w-full max-w-md">
             <div className="backdrop-blur-xl bg-white/10 p-5 rounded-2xl border border-white/20 shadow-lg hover:bg-white/15 transition-all">
               <h3 className="text-xl font-bold text-[#37c4ef] mb-2">🎓 Smart Matching</h3>
@@ -85,10 +84,10 @@ const Login = () => {
         </div>
       </div>
 
-      {/* Right Side - Login Form */}
+     
       <div className="flex w-full md:w-1/2 justify-center items-center p-8 relative overflow-hidden">
         
-        {/* Background Image behind form - halka */}
+        
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-20"
           style={{ backgroundImage: `url(${loginImg})` }}

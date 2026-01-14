@@ -78,7 +78,7 @@ export const router = createBrowserRouter([
       element: <TermsOfService />,
       },
 
-      // ✅ FIXED PAYMENT ROUTE
+     
       {
         path: "checkout/:id",
         element: (
@@ -171,7 +171,7 @@ export const router = createBrowserRouter([
         ),
       },
 
-      // ================= Student Routes =================
+      
       // ================= Student Routes =================
       {
         path: "my-applications",

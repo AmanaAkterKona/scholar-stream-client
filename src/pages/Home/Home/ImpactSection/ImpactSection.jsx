@@ -1,8 +1,8 @@
-// src/pages/Home/ImpactSection/ImpactSection.jsx
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import { FaUsers, FaUniversity, FaGraduationCap, FaGlobeAmericas } from 'react-icons/fa';
-import useTheme from "../../Shared/useTheme"; // পাথ চেক করে নিও
+import useTheme from "../../Shared/useTheme"; 
 
 const stats = [
   { id: 1, icon: <FaUsers />, count: "50K+", label: "Happy Students", color: "bg-cyan-500" },

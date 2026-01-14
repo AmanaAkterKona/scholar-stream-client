@@ -7,14 +7,14 @@ const MyProfile = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
-      {/* Page Title */}
+     
       <h2 className="text-3xl font-bold text-gray-800 mb-6">
         My Profile
       </h2>
 
-      {/* Profile Card */}
+    
       <div className="bg-white rounded-xl shadow-md p-6 flex flex-col md:flex-row gap-6">
-        {/* Avatar */}
+       
         <div className="flex-shrink-0 flex justify-center md:justify-start">
           <img
             src={

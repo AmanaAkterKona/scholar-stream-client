@@ -17,7 +17,7 @@ const Navbar = () => {
       .catch((error) => console.log(error));
   };
 
-  // Close dropdown when clicking outside
+  
   useEffect(() => {
     const handler = (e) => {
       if (profileRef.current && !profileRef.current.contains(e.target)) {

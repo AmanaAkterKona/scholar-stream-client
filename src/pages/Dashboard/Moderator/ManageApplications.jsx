@@ -37,7 +37,7 @@ const ManageApplications = () => {
 
   const isDark = theme === "dark";
 
-  /* ================= THEME STYLES ================= */
+  
   const pageBg = isDark
     ? "bg-gradient-to-br from-[#020d14] via-[#031f2b] to-[#020d14]"
     : "bg-gradient-to-br from-slate-50 via-indigo-50 to-purple-50";
@@ -113,7 +113,7 @@ const ManageApplications = () => {
     ? "bg-[#05293a] text-[#37c4ef] border-[#37c4ef]/30"
     : "bg-white text-slate-700 border-slate-200";
 
-  /* ================================================= */
+  
 
   useEffect(() => {
     fetchApplications();

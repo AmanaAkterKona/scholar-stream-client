@@ -38,7 +38,7 @@ const ContactUs = () => {
       : "bg-gradient-to-br from-[#e8fbff] via-[#f0f9ff] to-[#ddf4ff]"
     }`}>
       
-      {/* Animated Background Elements */}
+     
       <div className={`absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl animate-pulse ${
         isDark ? "bg-[#0aa6c8]/10" : "bg-[#0aa6c8]/5"
       }`}></div>

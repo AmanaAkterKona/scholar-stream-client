@@ -1,4 +1,3 @@
-// src/pages/Dashboard/MyReviews.jsx
 import React, { useEffect, useState } from "react";
 
 import { FaStar, FaEdit, FaTrash } from "react-icons/fa";
@@ -101,57 +100,47 @@ const MyReviews = () => {
 
   return (
     <div className="p-6">
-           {" "}
+      {" "}
       <div className="flex justify-between items-center mb-4">
-               {" "}
-        <h2 className="text-3xl font-extrabold text-slate-800">My Reviews</h2> 
-             {" "}
+        {" "}
+        <h2 className="text-3xl font-extrabold text-slate-800">
+          My Reviews
+        </h2>{" "}
         <button
-          onClick={openAddModal} // Changed: bg-blue-500 to a premium deep indigo-700
+          onClick={openAddModal}
           className="bg-indigo-700 text-white px-4 py-2 rounded-lg font-semibold shadow-md hover:bg-indigo-600 transition duration-300"
         >
-                    Add Review        {" "}
-        </button>
-             {" "}
-      </div>
-           {" "}
+          Add Review{" "}
+        </button>{" "}
+      </div>{" "}
       {reviews.length === 0 ? (
         <p className="text-lg text-slate-500">No reviews found</p>
       ) : (
         <table className="w-full table-auto border-collapse border border-slate-300 shadow-lg rounded-lg overflow-hidden">
-                   {" "}
+          {" "}
           <thead>
-                       {" "}
-            {/* Changed: bg-gray-100 to dark slate-800 with white text */}     
-                 {" "}
+            {" "}
             <tr className="bg-slate-800 text-white">
-                           {" "}
+              {" "}
               <th className="border border-slate-700 px-4 py-3 text-left">
                 University
-              </th>
-                           {" "}
+              </th>{" "}
               <th className="border border-slate-700 px-4 py-3 text-left">
                 Rating
-              </th>
-                           {" "}
+              </th>{" "}
               <th className="border border-slate-700 px-4 py-3 text-left">
                 Comment
-              </th>
-                           {" "}
+              </th>{" "}
               <th className="border border-slate-700 px-4 py-3 text-left">
                 Date
-              </th>
-                           {" "}
+              </th>{" "}
               <th className="border border-slate-700 px-4 py-3 text-left">
                 Actions
-              </th>
-                         {" "}
-            </tr>
-                     {" "}
-          </thead>
-                   {" "}
+              </th>{" "}
+            </tr>{" "}
+          </thead>{" "}
           <tbody>
-                       {" "}
+            {" "}
             {reviews.map(
               (
                 review,
@@ -161,13 +150,12 @@ const MyReviews = () => {
                   key={review._id}
                   className={index % 2 === 0 ? "bg-white" : "bg-slate-50"}
                 >
-                                 {" "}
+                  {" "}
                   <td className="border border-slate-200 px-4 py-2 text-slate-700">
                     {review.universityName}
-                  </td>
-                                 {" "}
+                  </td>{" "}
                   <td className="border border-slate-200 px-4 py-2">
-                                     {" "}
+                    {" "}
                     {Array.from({ length: 5 }, (_, i) => (
                       <FaStar
                         key={i} // Kept star color as yellow for standard rating visual
@@ -177,26 +165,21 @@ const MyReviews = () => {
                             : "text-slate-300 inline text-lg"
                         }
                       />
-                    ))}
-                                   {" "}
-                  </td>
-                                 {" "}
+                    ))}{" "}
+                  </td>{" "}
                   <td className="border border-slate-200 px-4 py-2 text-slate-700">
                     {review.reviewComment}
-                  </td>
-                                 {" "}
+                  </td>{" "}
                   <td className="border border-slate-200 px-4 py-2 text-sm text-slate-500">
                     {new Date(review.reviewDate).toLocaleDateString()}
-                  </td>
-                                 {" "}
+                  </td>{" "}
                   <td className="border border-slate-200 px-4 py-2 space-x-3">
-                                     {" "}
+                    {" "}
                     <button
                       onClick={() => openEditModal(review)} // Changed: text-blue-500 to indigo-600
                       className="text-indigo-600 hover:text-indigo-800 transition duration-150"
                     >
-                                          <FaEdit className="w-5 h-5" />       
-                               {" "}
+                      <FaEdit className="w-5 h-5" />{" "}
                     </button>
                                      {" "}
                     <button
@@ -286,11 +269,9 @@ const MyReviews = () => {
                          {" "}
             </div>
                      {" "}
-          </div>
-                 {" "}
+          </div>{" "}
         </div>
-      )}
-         {" "}
+      )}{" "}
     </div>
   );
 };

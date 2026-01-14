@@ -20,14 +20,14 @@
 .marquee-content {
   display: flex;
   flex-shrink: 0;
-  gap: 5rem; /* লোগোগুলোর মধ্যে গ্যাপ */
-  padding-right: 5rem; /* সেট দুটির মাঝখানেও একই গ্যাপ বজায় রাখতে */
+  gap: 5rem; 
+  padding-right: 5rem; 
   min-width: 100%;
   animation: scroll 30s linear infinite;
 }
 
 .marquee-logo {
-  height: 60px; /* লোগো বড় করা হয়েছে */
+  height: 60px;
   width: auto;
   object-fit: contain;
   filter: grayscale(100%);
@@ -35,7 +35,7 @@
   transition: all 0.4s ease;
 }
 
-/* ডার্ক মোড লজিক */
+
 .dark-bg .marquee-logo {
   filter: grayscale(100%) invert(1) brightness(2);
   mix-blend-mode: screen;
@@ -49,7 +49,7 @@
   mix-blend-mode: normal !important;
 }
 
-/* হোভার করলে অ্যানিমেশন থেমে যাবে */
+
 .marquee-wrapper:hover .marquee-content {
   animation-play-state: paused;
 }
@@ -59,6 +59,6 @@
     transform: translateX(0);
   }
   to {
-    transform: translateX(-50%); /* অর্ধেক দূরত্ব গেলেই লুপটি আবার শুরু হবে */
+    transform: translateX(-50%);
   }
 }

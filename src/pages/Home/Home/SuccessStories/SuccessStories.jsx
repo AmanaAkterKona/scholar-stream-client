@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Star, Award } from 'lucide-react';
-import useTheme from "../../Shared/useTheme"; // Theme context path check kore nio
+import useTheme from "../../Shared/useTheme"; 
 
 const SuccessStories = () => {
   const [currentSlide, setCurrentSlide] = useState(0);

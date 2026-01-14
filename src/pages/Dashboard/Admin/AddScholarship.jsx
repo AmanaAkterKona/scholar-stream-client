@@ -5,7 +5,6 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-
 import {
   FaUniversity,
   FaGlobeAmericas,
@@ -27,7 +26,7 @@ const AddScholarship = () => {
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  
+
   // Theme Logic
   const { theme } = useTheme();
   const isDark = theme === "dark";
@@ -81,8 +80,8 @@ const AddScholarship = () => {
 
   // Dynamic Styles based on Theme
   const inputStyle = `w-full px-4 py-3 border rounded-xl font-semibold outline-none transition-all duration-200 ${
-    isDark 
-      ? "bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 focus:border-indigo-500 focus:ring-indigo-500/10" 
+    isDark
+      ? "bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 focus:border-indigo-500 focus:ring-indigo-500/10"
       : "bg-white border-[#e2e8f0] text-[#1a2e35] placeholder:text-[#94a3b8] focus:border-[#008080] focus:ring-[#008080]/10"
   }`;
 
@@ -91,20 +90,33 @@ const AddScholarship = () => {
   }`;
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 p-6 md:p-12 font-sans ${
-      isDark ? "bg-[#020b17]" : "bg-[#f0f9ff]"
-    }`}>
+    <div
+      className={`min-h-screen transition-colors duration-300 p-6 md:p-12 font-sans ${
+        isDark ? "bg-[#020b17]" : "bg-[#f0f9ff]"
+      }`}
+    >
       <div className="max-w-5xl mx-auto">
-        <div className={`flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4 border-l-4 pl-6 ${
-          isDark ? "border-indigo-500" : "border-[#008080]"
-        }`}>
+        <div
+          className={`flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4 border-l-4 pl-6 ${
+            isDark ? "border-indigo-500" : "border-[#008080]"
+          }`}
+        >
           <div>
-            <h1 className={`text-3xl md:text-4xl font-black tracking-tight ${
-              isDark ? "text-white" : "text-[#1a2e35]"
-            }`}>
-              Add New <span className={isDark ? "text-indigo-400" : "text-[#00a3c4]"}>Scholarship</span>
+            <h1
+              className={`text-3xl md:text-4xl font-black tracking-tight ${
+                isDark ? "text-white" : "text-[#1a2e35]"
+              }`}
+            >
+              Add New{" "}
+              <span className={isDark ? "text-indigo-400" : "text-[#00a3c4]"}>
+                Scholarship
+              </span>
             </h1>
-            <p className={`${isDark ? "text-slate-400" : "text-[#64748b]"} font-medium mt-1 italic`}>
+            <p
+              className={`${
+                isDark ? "text-slate-400" : "text-[#64748b]"
+              } font-medium mt-1 italic`}
+            >
               Publish global opportunities for the next generation.
             </p>
           </div>
@@ -113,19 +125,29 @@ const AddScholarship = () => {
         <form
           onSubmit={handleSubmit(onSubmit)}
           className={`rounded-[40px] shadow-2xl p-8 md:p-12 border transition-all duration-300 ${
-            isDark 
-              ? "bg-slate-900 border-slate-800 shadow-black/20" 
+            isDark
+              ? "bg-slate-900 border-slate-800 shadow-black/20"
               : "bg-white border-white shadow-cyan-900/5"
           }`}
         >
           <div className="space-y-12">
             {/* Institution Section */}
             <section>
-              <div className={`flex items-center gap-3 mb-8 border-b pb-4 ${
-                isDark ? "border-slate-800" : "border-slate-100"
-              }`}>
-                <FaUniversity className={isDark ? "text-indigo-400" : "text-[#008080] text-xl"} />
-                <h2 className={`text-xl font-black ${isDark ? "text-slate-100" : "text-[#1a2e35]"}`}>
+              <div
+                className={`flex items-center gap-3 mb-8 border-b pb-4 ${
+                  isDark ? "border-slate-800" : "border-slate-100"
+                }`}
+              >
+                <FaUniversity
+                  className={
+                    isDark ? "text-indigo-400" : "text-[#008080] text-xl"
+                  }
+                />
+                <h2
+                  className={`text-xl font-black ${
+                    isDark ? "text-slate-100" : "text-[#1a2e35]"
+                  }`}
+                >
                   University Profile
                 </h2>
               </div>
@@ -161,12 +183,24 @@ const AddScholarship = () => {
             </section>
 
             {/* Global Standings Section */}
-            <section className={`p-6 md:p-8 rounded-[30px] border transition-colors ${
-              isDark ? "bg-slate-800/40 border-slate-700" : "bg-[#f0f9ff]/40 border-[#e0f2fe]"
-            }`}>
+            <section
+              className={`p-6 md:p-8 rounded-[30px] border transition-colors ${
+                isDark
+                  ? "bg-slate-800/40 border-slate-700"
+                  : "bg-[#f0f9ff]/40 border-[#e0f2fe]"
+              }`}
+            >
               <div className="flex items-center gap-3 mb-8">
-                <FaGlobeAmericas className={isDark ? "text-indigo-400" : "text-[#008080] text-xl"} />
-                <h2 className={`text-xl font-black ${isDark ? "text-slate-100" : "text-[#1a2e35]"}`}>
+                <FaGlobeAmericas
+                  className={
+                    isDark ? "text-indigo-400" : "text-[#008080] text-xl"
+                  }
+                />
+                <h2
+                  className={`text-xl font-black ${
+                    isDark ? "text-slate-100" : "text-[#1a2e35]"
+                  }`}
+                >
                   Global Standings
                 </h2>
               </div>
@@ -203,11 +237,21 @@ const AddScholarship = () => {
 
             {/* Academic & Finance Section */}
             <section>
-              <div className={`flex items-center gap-3 mb-8 border-b pb-4 ${
-                isDark ? "border-slate-800" : "border-slate-100"
-              }`}>
-                <FaGraduationCap className={isDark ? "text-indigo-400" : "text-[#008080] text-2xl"} />
-                <h2 className={`text-xl font-black ${isDark ? "text-slate-100" : "text-[#1a2e35]"}`}>
+              <div
+                className={`flex items-center gap-3 mb-8 border-b pb-4 ${
+                  isDark ? "border-slate-800" : "border-slate-100"
+                }`}
+              >
+                <FaGraduationCap
+                  className={
+                    isDark ? "text-indigo-400" : "text-[#008080] text-2xl"
+                  }
+                />
+                <h2
+                  className={`text-xl font-black ${
+                    isDark ? "text-slate-100" : "text-[#1a2e35]"
+                  }`}
+                >
                   Academic & Financials
                 </h2>
               </div>
@@ -218,10 +262,27 @@ const AddScholarship = () => {
                     {...register("subjectCategory", { required: true })}
                     className={inputStyle}
                   >
-                    <option value="" className={isDark ? "bg-slate-900" : ""}>Select Category</option>
-                    <option value="Engineering" className={isDark ? "bg-slate-900" : ""}>Engineering</option>
-                    <option value="Computer Science" className={isDark ? "bg-slate-900" : ""}>Computer Science</option>
-                    <option value="Business" className={isDark ? "bg-slate-900" : ""}>Business</option>
+                    <option value="" className={isDark ? "bg-slate-900" : ""}>
+                      Select Category
+                    </option>
+                    <option
+                      value="Engineering"
+                      className={isDark ? "bg-slate-900" : ""}
+                    >
+                      Engineering
+                    </option>
+                    <option
+                      value="Computer Science"
+                      className={isDark ? "bg-slate-900" : ""}
+                    >
+                      Computer Science
+                    </option>
+                    <option
+                      value="Business"
+                      className={isDark ? "bg-slate-900" : ""}
+                    >
+                      Business
+                    </option>
                   </select>
                 </div>
                 <div>
@@ -230,9 +291,21 @@ const AddScholarship = () => {
                     {...register("scholarshipCategory", { required: true })}
                     className={inputStyle}
                   >
-                    <option value="" className={isDark ? "bg-slate-900" : ""}>Select Type</option>
-                    <option value="Full fund" className={isDark ? "bg-slate-900" : ""}>Full fund</option>
-                    <option value="Partial" className={isDark ? "bg-slate-900" : ""}>Partial</option>
+                    <option value="" className={isDark ? "bg-slate-900" : ""}>
+                      Select Type
+                    </option>
+                    <option
+                      value="Full fund"
+                      className={isDark ? "bg-slate-900" : ""}
+                    >
+                      Full fund
+                    </option>
+                    <option
+                      value="Partial"
+                      className={isDark ? "bg-slate-900" : ""}
+                    >
+                      Partial
+                    </option>
                   </select>
                 </div>
                 <div>
@@ -241,9 +314,21 @@ const AddScholarship = () => {
                     {...register("degree", { required: true })}
                     className={inputStyle}
                   >
-                    <option value="" className={isDark ? "bg-slate-900" : ""}>Select Degree</option>
-                    <option value="Bachelor" className={isDark ? "bg-slate-900" : ""}>Bachelor</option>
-                    <option value="Masters" className={isDark ? "bg-slate-900" : ""}>Masters</option>
+                    <option value="" className={isDark ? "bg-slate-900" : ""}>
+                      Select Degree
+                    </option>
+                    <option
+                      value="Bachelor"
+                      className={isDark ? "bg-slate-900" : ""}
+                    >
+                      Bachelor
+                    </option>
+                    <option
+                      value="Masters"
+                      className={isDark ? "bg-slate-900" : ""}
+                    >
+                      Masters
+                    </option>
                   </select>
                 </div>
                 <div>
@@ -288,14 +373,18 @@ const AddScholarship = () => {
             </section>
           </div>
 
-          <div className={`mt-12 flex flex-col md:flex-row justify-end items-center gap-6 pt-10 border-t ${
-            isDark ? "border-slate-800" : "border-slate-100"
-          }`}>
+          <div
+            className={`mt-12 flex flex-col md:flex-row justify-end items-center gap-6 pt-10 border-t ${
+              isDark ? "border-slate-800" : "border-slate-100"
+            }`}
+          >
             <button
               type="button"
               onClick={() => reset()}
               className={`font-bold uppercase tracking-widest text-xs transition-colors ${
-                isDark ? "text-slate-500 hover:text-white" : "text-[#64748b] hover:text-[#1a2e35]"
+                isDark
+                  ? "text-slate-500 hover:text-white"
+                  : "text-[#64748b] hover:text-[#1a2e35]"
               }`}
             >
               Reset Form
@@ -304,8 +393,8 @@ const AddScholarship = () => {
               type="submit"
               disabled={loading}
               className={`w-full md:w-auto px-12 py-4 font-black rounded-2xl shadow-lg flex items-center justify-center gap-3 transition-all active:scale-95 disabled:opacity-50 ${
-                isDark 
-                  ? "bg-indigo-600 hover:bg-indigo-700 text-white" 
+                isDark
+                  ? "bg-indigo-600 hover:bg-indigo-700 text-white"
                   : "bg-[#008080] hover:bg-[#006666] text-white"
               }`}
             >

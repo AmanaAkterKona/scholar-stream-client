@@ -38,9 +38,9 @@ const Footer = () => {
       <footer
         className={`${footerBg} ${textColor} pt-16 pb-10 transition-all duration-500 relative`}
       >
-        {/* TOP SECTION */}
+       
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-10 items-start relative z-10">
-          {/* LOGO & SOCIAL */}
+         
           <div>
             <Link to="/" className="flex items-center gap-3 select-none group">
               <div className="bg-gradient-to-br from-[#D4AF37] to-[#FFD700] p-1 rounded-full text-black flex items-center justify-center transition-transform duration-500 group-hover:scale-110 shadow-lg">
@@ -243,7 +243,7 @@ const Footer = () => {
       {/* THEME TOGGLE BUTTON */}
       <div className="flex justify-center mt-12 relative z-10">
         <button
-  onClick={toggleTheme}  // No parameter needed now
+  onClick={toggleTheme}  
   className={`flex items-center gap-3 px-6 py-2 rounded-full font-bold transition-all duration-300 shadow-md ${
     theme === "dark"
       ? "bg-gradient-to-r from-[#1e3a5f] to-[#2a5a8f] text-white"

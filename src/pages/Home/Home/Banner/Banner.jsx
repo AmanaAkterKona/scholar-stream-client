@@ -75,10 +75,7 @@ const Banner = () => {
     return () => clearInterval(timer);
   }, []);
 
-  /* ================= THEME STYLES ================= */
-
-  // Dark theme - perfect, no change
-  // Light theme - premium feel with better contrast
+  
   const pageBg = isDark
     ? "bg-gradient-to-br from-[#020d14] via-[#031f2b] to-[#020d14]"
     : "bg-gradient-to-br from-[#e8f4f8] via-[#d4ebf5] to-[#e0f2f7]";
@@ -121,7 +118,7 @@ const Banner = () => {
   const statHighlight = isDark ? "text-[#37c4ef]" : "text-[#0891b2]";
   const nameHighlight = isDark ? "text-[#37c4ef]" : "text-[#0891b2]";
 
-  /* ================================================= */
+ 
 
   return (
     <div

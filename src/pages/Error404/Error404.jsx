@@ -1,4 +1,4 @@
-// src/components/Error404.jsx
+
 import React from 'react';
 import errorImg from '../../assets/error404.avif'; 
 

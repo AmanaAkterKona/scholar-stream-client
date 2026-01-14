@@ -1,4 +1,4 @@
-// src/pages/Home/FeaturedScholarships/FeaturedScholarships.jsx
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +17,7 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import useTheme from "../../Shared/useTheme"; // নিশ্চিত হয়ে নিও পাথ ঠিক আছে কি না
+import useTheme from "../../Shared/useTheme"; 
 
 const FeaturedScholarships = () => {
   const [scholarships, setScholarships] = useState([]);
@@ -34,7 +34,7 @@ const FeaturedScholarships = () => {
       .catch((err) => console.error(err));
   }, []);
 
-  /* ================= THEME STYLES ================= */
+  
   const sectionBg = isDark 
     ? "bg-gradient-to-br from-[#020d14] via-[#031f2b] to-[#020d14]" 
     : "bg-gradient-to-b from-[#e0f7fa] via-[#f8fdff] to-white";
@@ -64,7 +64,7 @@ const FeaturedScholarships = () => {
     ? "bg-[#37c4ef] hover:bg-[#1faed1] text-white shadow-[#37c4ef]/20"
     : "bg-[#00bcd4] text-white shadow-cyan-200 hover:bg-[#0097a7]";
 
-  /* ================================================ */
+
 
   return (
     <div className={`py-20 px-6 relative overflow-hidden transition-colors duration-700 ${sectionBg}`}>
